@@ -1,0 +1,88 @@
+/* Fonts */
+@font-face {
+  font-family: 'PT Sans';
+  src: url('./fonts/pt-sans/pt-sans-regular.woff2') format('woff2'),
+      url('./fonts/pt-sans/pt-sans-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PT Sans';
+  src: url('./fonts/pt-sans/pt-sans-bold.woff2') format('woff2'),
+      url('./fonts/pt-sans/pt-sans-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('./fonts/ubuntu/ubuntu-bold.woff2') format('woff2'),
+      url('./fonts/ubuntu/ubuntu-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* End Fonts */
+
+/* General */
+:root {
+  --main-text-color: #0D2C3D;
+  --secondary-color: #E7F3FA;
+  --success-color: #76BF7E;
+  --success-transparent-color: #F1FFF3;
+  --danger-color: #E41D1D;
+  --badge-color: #EB5757;
+  --warning-color: #FEAC0B;
+  --primary-color: #5D5FEF;
+}
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+html {
+  font-family: 'PT Sans', 'Arial', sans-serif;
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--main-text-color);
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.main {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+.container {
+  min-width: 360px;
+  max-width: 1540px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+.visually-hidden {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+/* End General */
