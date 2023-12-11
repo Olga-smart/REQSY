@@ -509,7 +509,7 @@ a {
 /* Registration Modal */
 .registration-modal__window {
   width: 27.15rem;
-  min-height: 34.25rem;  
+  /* height: 34.25rem;  */
 }
 .registration-modal__body {
   background-color: var(--secondary-color);
@@ -526,3 +526,31 @@ a {
   letter-spacing: .04rem;
 }
 /* End Registration Modal */
+
+/* Media Registration Modal */
+@media (max-width: 575px) {
+  .registration-modal__window {
+    min-height: 28.15rem;
+  }
+  .registration-modal__body {
+    padding: 19.4rem 0.5rem 3.95rem;
+    block-size: 80%;
+  }
+}
+@media (max-height: 700px) {
+  .registration-modal__window {
+    max-height: 95vh;
+  }
+  .registration-modal__body {
+    padding-top: 60vh;
+    background-size: 60%;
+  }
+}
+@media (max-height: 500px) {
+  .registration-modal__body {
+    padding-top: 50vh;
+    padding-bottom: 2rem;
+    background-size: 45%;
+  }
+}
+/* End Media Registration Modal */
