@@ -534,10 +534,11 @@ a {
   }
   .registration-modal__body {
     padding: 19.4rem 0.5rem 3.95rem;
-    block-size: 80%;
+    background-size: 80%;
+    background-position: top 2.2rem center;
   }
 }
-@media (max-height: 700px) {
+@media (max-height: 700px) and (orientation: landscape) {
   .registration-modal__window {
     max-height: 95vh;
   }
@@ -546,7 +547,7 @@ a {
     background-size: 60%;
   }
 }
-@media (max-height: 500px) {
+@media (max-height: 500px) and (orientation: landscape) {
   .registration-modal__body {
     padding-top: 50vh;
     padding-bottom: 2rem;
