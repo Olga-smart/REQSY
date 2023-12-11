@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Registration</title>
+</head>
+<body>
+  <main class="page-content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Главная</a></li>
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Личный кабинет</a></li>
+          <li class="breadcrumb__item" aria-current="page">Регистрация</li>
+        </ol>
+      </nav>
+      <h1 class="page-heading">Регистрация</h1>
+      <form class="registration-form js-registration-form" novalidate>
+        <div class="registration-form__left">
+          <div class="form-control js-form-control">
+            <label for="registration__name" class="visually-hidden">Имя</label>
+            <input type="text" id="registration__name" class="input js-registration-form__name" name="name" placeholder="Имя" pattern="[А-Яа-яЁё]{2,}">
+          </div>
+          <div class="form-control js-form-control">
+            <label for="registration__surname" class="visually-hidden">Отчество</label>
+            <input type="text" id="registration__surname" class="input js-registration-form__surname" name="surname" placeholder="Отчество" pattern="[А-Яа-яЁё]{2,}">
+          </div>
+          <div class="form-control js-form-control">
+            <label for="registration__phone" class="visually-hidden">Телефон</label>
+            <!-- type="text" is necessary for correct work of IMask plugin -->
+            <input type="text" id="registration__phone" class="input input_phone js-input_phone js-registration-form__phone" name="phone" placeholder="Телефон">
+          </div>
+          <div class="form-control js-form-control">
+            <label for="registration__mail" class="visually-hidden">Email</label>
+            <input type="email" id="registration__mail" class="input js-registration-form__mail" name="mail" placeholder="Email">
+          </div>
+          <div class="form-control js-form-control">
+            <div class="toggle">
+              <input class="toggle__field js-registration-form__agreement" id="registration__toggle" type="checkbox" checked="checked" name="agreement">
+              <label class="toggle__label" for="registration__toggle">
+                <!-- This wrapper is necessary for proper text wrapping if there are other tags inside the label -->
+                <span class="toggle__label-inner">
+                  Я соглашаюсь на обработку <a href="#">персональных данных</a>
+                </span>              
+              </label>
+            </div>
+          </div>          
+          <button class="button" type="submit">Регистрация</button>
+        </div>
+        <div class="registration-form__right">
+          <div class="img-uploader js-img-uploader">
+            <input type="file" accept="image/*" class="visually-hidden js-img-uploader__input" name="photo">
+            <div class="img-uploader__img-area js-img-uploader__img-area" style="background-image: url(../img/account-photo-placeholder.svg)"></div>
+            <div class="img-uploader__button-area">
+              <span>Загрузите фото профиля</span>
+              <button class="button button_secondary button_icon_plus js-img-uploader__button" type="button">Добавить</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <div class="modal js-modal registration-modal js-registration-modal">
+    <div class="modal__window js-modal__window registration-modal__window">
+      <div class="modal__body registration-modal__body" style="background-image: url(../img/registration-modal.svg)">
+        <button class="modal__close-button js-modal__close-button">✕<span class="visually-hidden">Закрыть</span></button>
+        <div class="registration-modal__message">Регистрация прошла успешно!</div>
+      </div>    
+    </div>
+  </div>
+
+  <script src="../libs/imask/imask.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
