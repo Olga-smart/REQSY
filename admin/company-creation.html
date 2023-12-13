@@ -34,21 +34,21 @@
             </div>
           </div>
           <div class="form-control js-form-control">
-            <label for="company-creation__name" class="visually-hidden">Имя</label>
-            <input type="text" id="company-creation__name" class="input js-company-creation-form__name" name="name" placeholder="Название компании">
+            <label for="companyCreationName" class="visually-hidden">Имя</label>
+            <input type="text" id="companyCreationName" class="input js-company-creation-form__name" name="name" placeholder="Название компании">
           </div>
           <div class="form-control js-form-control">
-            <label for="company-creation__tax-number" class="visually-hidden">ИНН</label>
-            <input type="text" id="company-creation__tax-mumber" class="input js-company-creation-form__tax-number" name="tax" placeholder="ИНН">
+            <label for="companyCreationTaxNumber" class="visually-hidden">ИНН</label>
+            <input type="text" id="companyCreationTaxNumber" class="input js-company-creation-form__tax-number" name="tax" placeholder="ИНН">
           </div>
           <div class="form-control js-form-control">
-            <label for="company-creation__address" class="visually-hidden">Адрес</label>
-            <input type="text" id="company-creation__address" class="input input_address js-input_address js-company-creation-form__address" name="address" placeholder="Адрес">
+            <label for="companyCreationAddress" class="visually-hidden">Адрес</label>
+            <input type="text" id="companyCreationAddress" class="input input_address js-input_address js-company-creation-form__address" name="address" placeholder="Адрес">
           </div>
           <div class="form-control js-form-control">
             <div class="toggle">
-              <input class="toggle__field js-company-creation-form__agreement" id="company-creation__toggle" type="checkbox" checked="checked" name="agreement">
-              <label class="toggle__label" for="company-creation__toggle">
+              <input class="toggle__field js-company-creation-form__agreement" id="companyCreationToggle" type="checkbox" checked="checked" name="agreement">
+              <label class="toggle__label" for="companyCreationToggle">
                 <!-- This wrapper is necessary for proper text wrapping if there are other tags inside the label -->
                 <span class="toggle__label-inner">
                   Я соглашаюсь на обработку <a href="#">персональных данных</a>
@@ -72,14 +72,14 @@
     </div>
   </main>
 
-  <script src="https://api-maps.yandex.ru/2.1/?apikey=bbda478a-92b3-495a-99fe-64d5a8143422&lang=ru_RU" type="text/javascript"></script>
+  <!-- <script src="https://api-maps.yandex.ru/2.1/?apikey=bbda478a-92b3-495a-99fe-64d5a8143422&lang=ru_RU" type="text/javascript"></script> -->
+  <script src=" https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=1eb74772-7ee5-42bf-a977-13ef8b98118c&suggest_apikey=bbda478a-92b3-495a-99fe-64d5a8143422" type="text/javascript"></script>
   <script src="https://yandex.st/jquery/2.2.3/jquery.min.js" type="text/javascript"></script>
   <script>
     ymaps.ready(init);
 
     function init() {
-      // Подключаем поисковые подсказки к полю ввода.
-      const suggestView = new ymaps.SuggestView('company-creation__address');
+      const suggestView = new ymaps.SuggestView('companyCreationAddress');
     }
   </script>
   <script src="../main.js"></script>
