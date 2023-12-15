@@ -58,38 +58,8 @@ html {
   height: 100%;
   scroll-behavior: smooth;
 }
-body {
-  min-height: 100%;
-  margin: 0;
-  padding: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
 a {
   color: inherit;
-}
-.page-content {
-  -webkit-box-flex: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding-top: 1.5rem;
-  padding-bottom: 4rem;       
-}
-.page-heading {
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: .04rem;
-  color: #000;
-  line-height: normal;
-  margin-bottom: 3rem;
-}
-.page-heading_without_margin {
-  margin: 0;
 }
 .container {
   min-width: 300px;
@@ -118,16 +88,75 @@ a {
 }
 /* End General */
 
-/* Media General */
+/* Page */
+.page {
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.page__content {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+  position: relative;       
+}
+.page__heading {
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: .04rem;
+  color: #000;
+  line-height: normal;
+  margin-bottom: 3rem;
+}
+.page__heading_without_margin {
+  margin: 0;
+}
+.page__scroll-top-button {
+  display: none;
+  border: none;
+  border-radius: .5rem;
+  width: 3.4rem;
+  height: 3.3rem;
+  background-color: rgba(13, 44, 61, 0.5);
+  position: absolute;
+  bottom: -1.5rem;
+  right: 1rem;
+  cursor: pointer;
+  background-image: url(./img/arrow-top.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1rem;
+  -webkit-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.page__scroll-top-button:hover {
+  background-color: var(--main-text-color);
+}
+.page__scroll-top-button_visible {
+  display: block;
+}
+/* End Page */
+
+/* Media Page */
 @media (max-width: 575px) {
-  .page-heading {
+  .page__heading {
     margin-bottom: 1.5rem;
   }
-  .page-heading_without_margin {
+  .page__heading_without_margin {
     margin: 0;
   }
 }
-/* End Media General */
+/* End Media Page */
 
 /* Breadcrumb */
 .breadcrumb {
@@ -159,15 +188,6 @@ a {
   color: inherit;
 }
 /* End Breadcrumb */
-
-/* Up Button */
-.up-button {
-  display: none;
-}
-.up-button_visible {
-  display: block;
-}
-/* End Up Button */
 
 /* Form Elements */
 .input {

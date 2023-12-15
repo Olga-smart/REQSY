@@ -448,3 +448,54 @@ if (companyCreationForm) {
   new CompanyCreationForm(companyCreationForm);
 }
 /* End Company Creation Form */
+
+/* Scroll Top Button */
+class ScrollTopButton {
+  constructor(component) {
+    this._initFields(component);
+    this._attachEventHandlers();
+    this._showOrHideIfNecessary();
+  }
+
+  show() {
+    this._component.classList.add('page__scroll-top-button_visible');
+  }
+
+  hide() {
+    this._component.classList.remove('page__scroll-top-button_visible');
+  }
+
+  _initFields(component) {
+    this._component = component;
+  }
+  
+  _handleClick() {
+    window.scrollTo(0, 0);
+  }
+  
+  _showOrHideIfNecessary() {
+    const fullPageHeight = Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
+    const windowHeight = document.documentElement.clientHeight;
+
+    if ((fullPageHeight - windowHeight) > (windowHeight / 2)) {
+      this.show();
+    } else {
+      this.hide();
+    }
+  }
+
+  _attachEventHandlers() {
+    this._component.addEventListener('click', this._handleClick);
+    window.addEventListener('resize', this._showOrHideIfNecessary.bind(this));
+  }
+}
+
+const scrollTopButton = document.querySelector('.js-page__scroll-top-button');
+if (scrollTopButton) {
+  new ScrollTopButton(scrollTopButton);
+}
+/* End Scroll Top Button */
