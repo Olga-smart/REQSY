@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Location</title>
+</head>
+<body class="page">  
+  <main class="page__content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Главная</a></li>
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Личный кабинет</a></li>
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Локации</a></li>
+          <li class="breadcrumb__item" aria-current="page">Московский адрес</li>
+        </ol>
+      </nav>
+      <div class="location-page">
+        <div class="location-page__header">
+          <img src="../img/location-avatar-placeholder.webp" alt="" class="location-page__avatar">  
+          <h1 class="page__heading page__heading_without_margin location-page__heading">Московский адрес</h1>
+        </div>
+        <div class="location-page__body">
+          <ul class="side-menu">
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Моё</a>
+            </li>
+            <li class="side-menu__item side-menu__item_active">
+              <a href="#" class="side-menu__link">Локации</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Заявки</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Мои данные</a>
+            </li>
+          </ul>
+          <form class="location-page__form js-location-page__form" novalidate>
+            <div class="form-control js-form-control">
+              <label for="locationName" class="visually-hidden">Название локации</label>
+              <input type="text" id="locationName" class="input js-location-page__name" name="name" placeholder="Название локации">
+            </div>
+            <div class="form-control js-form-control">
+              <label for="locationAddress" class="visually-hidden">Адрес</label>
+              <input type="text" id="locationAddress" class="input input_address js-input_address js-location-page__address" name="address" placeholder="Адрес">
+            </div>              
+            <fieldset class="fieldset location-page__fieldset">
+              <legend class="legend">Координаты</legend>
+              <div class="form-control js-form-control">          
+                <div class="location-page__coords">
+                  <label for="locationLatitude" class="visually-hidden">Широта</label>
+                  <input type="text" id="locationLatitude" class="input js-input_coords location-page__latitude js-location-page__latitude" name="latitude" placeholder="Широта">
+                  <label for="locationLongitude" class="visually-hidden">Долгота</label>
+                  <input type="text" id="locationLongitude" class="input js-input_coords location-page__longitude js-location-page__longitude" name="longitude" placeholder="Долгота">
+                </div>    
+              </div>                
+            </fieldset>              
+            <div class="form-control js-form-control">
+              <label for="locationPhone" class="visually-hidden">Телефон</label>
+              <!-- type="text" is necessary for correct work of IMask plugin -->
+              <input type="text" id="locationPhone" class="input input_phone js-input_phone js-location-form__phone" name="phone" placeholder="Телефон">
+            </div>
+            <div class="location-page__hours">
+              <fieldset class="fieldset location-page__fieldset">
+                <legend class="legend">Время работы</legend>         
+                <div class="location-page__working-hours">
+                  <label for="locationOpeningTime" class="visually-hidden">с</label>
+                  <input type="text" id="locationOpeningTime" class="input input_time js-input_time js-location-page__opening-time" name="opening-time" placeholder="00:00">
+                  <label for="locationClosingTime" class="visually-hidden">до</label>
+                  <input type="text" id="locationClosingTime" class="input input_time js-input_time js-location-page__closing-time" name="closing-time" placeholder="00:00">
+                </div>               
+              </fieldset>
+              <fieldset class="fieldset location-page__fieldset">
+                <legend class="legend">Обед</legend>         
+                <div class="location-page__lunch-hours">
+                  <label for="locationLunchStartTime" class="visually-hidden">с</label>
+                  <input type="text" id="locationLunchStartTime" class="input input_time js-input_time js-location-page__lunch-start-time" name="opening-time" placeholder="00:00">
+                  <label for="locationLunchEndTime" class="visually-hidden">до</label>
+                  <input type="text" id="locationLuchEndTime" class="input input_time js-input_time js-location-page__lunch-end-time" name="closing-time" placeholder="00:00">
+                </div>               
+              </fieldset>
+            </div>
+            <button class="location-page__add-button">
+              <span class="location-page__add-button-text">
+                Добавить локацию
+              </span>
+            </button>
+            <button class="button location-page__save-button">Сохранить</button>
+          </form>          
+      </div>      
+    </div>
+    <button class="page__scroll-top-button js-page__scroll-top-button"></button>
+  </main>
+
+  <nav class="bottom-menu">
+    <div class="container">
+      <ul class="bottom-menu__list">
+        <li class="bottom-menu__item bottom-menu__item_my">
+          <a href="#" class="bottom-menu__link">Моё</a>
+          <span class="bottom-menu__badge">1</span>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_locations bottom-menu__item_active">
+          <a href="#" class="bottom-menu__link">Локации</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_requests">
+          <a href="./requests.html" class="bottom-menu__link">Заявки</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_profile">
+          <a href="#" class="bottom-menu__link">Мои данные</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <script src=" https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=1eb74772-7ee5-42bf-a977-13ef8b98118c&suggest_apikey=bbda478a-92b3-495a-99fe-64d5a8143422" type="text/javascript"></script>
+  <script>
+    ymaps.ready(init);
+
+    function init() {
+      const suggestView = new ymaps.SuggestView('locationAddress');
+
+      const addressInput = document.getElementById('locationAddress');
+      const latitudeInput = document.getElementById('locationLatitude');
+      const longitudeInput = document.getElementById('locationLongitude');
+
+      addressInput.addEventListener('change', () => {
+        const geocoder = ymaps.geocode(addressInput.value);
+
+        geocoder.then((res) => {
+          const coords = res.geoObjects.get(0).geometry.getCoordinates();
+          latitudeInput.value = coords[0];
+          longitudeInput.value = coords[1];
+        })
+      });
+
+      latitudeInput.addEventListener('change', () => {
+        if (longitudeInput.value === '') return;
+
+        const latitude = latitudeInput.value;
+        const longitude = longitudeInput.value;
+
+        const geocoder = ymaps.geocode(`${latitude}, ${longitude}`);
+
+        geocoder.then((res) => {
+          const address = res.geoObjects.get(0).getAddressLine();
+          addressInput.value = address;
+        });
+      });
+
+      longitudeInput.addEventListener('change', () => {
+        if (latitudeInput.value === '') return;
+
+        const latitude = latitudeInput.value;
+        const longitude = longitudeInput.value;
+
+        const geocoder = ymaps.geocode(`${latitude}, ${longitude}`);
+
+        geocoder.then((res) => {
+          const address = res.geoObjects.get(0).getAddressLine();
+          addressInput.value = address;
+        });
+      });
+    }
+  </script>
+  <script src="../libs/imask/imask.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
+

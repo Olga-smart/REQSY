@@ -64,13 +64,13 @@ if (telInputs) {
       mask.updateOptions({
         lazy: false,
       });
-    })
+    });
 
     input.addEventListener('blur', () => {
       mask.updateOptions({
         lazy: true,
       });
-    })
+    });
   });
 }
 /* End Phone Mask */
@@ -499,3 +499,154 @@ if (scrollTopButton) {
   new ScrollTopButton(scrollTopButton);
 }
 /* End Scroll Top Button */
+
+/* Coords Mask */
+const coordsInputs = document.querySelectorAll('.js-input_coords');
+if (coordsInputs) {
+  coordsInputs.forEach((input) => {
+    IMask(input, {
+      mask: Number,
+      scale: 6,
+      padFractionalZeros: false,
+      radix: '.',
+      mapToRadix: ['.', ','],
+    });
+  });
+}
+/* End Coords Mask */
+
+/* Time Mask */
+const timeInputs = document.querySelectorAll('.js-input_time');
+if (timeInputs) {
+  timeInputs.forEach((input) => {
+    const mask = IMask(input, {
+      overwrite: true,
+      autofix: true,
+      mask: 'HH:MM',
+      blocks: {
+        HH: {
+          mask: IMask.MaskedRange,
+          placeholderChar: '0',
+          from: 0,
+          to: 23,
+          maxLength: 2
+        },
+        MM: {
+          mask: IMask.MaskedRange,
+          placeholderChar: '0',
+          from: 0,
+          to: 59,
+          maxLength: 2
+        }
+      }
+    });
+
+    input.addEventListener('focus', () => {
+      mask.updateOptions({
+        lazy: false,
+      });
+    });
+
+    input.addEventListener('blur', () => {
+      mask.updateOptions({
+        lazy: true,
+      });
+    });
+  });
+}
+/* End Time Mask */
+
+/* Location Form */
+class LocationForm {
+  constructor(component) {
+    this._initFields(component);
+    this._attachEventHandlers();
+  }
+
+  _initFields(component) {
+    this._component = component;
+    this._name = component.querySelector('.js-location-page__name');
+    this._address = component.querySelector('.js-location-page__address');
+    this._latitude = component.querySelector('.js-location-page__latitude');
+    this._longitude = component.querySelector('.js-location-page__longitude');
+    this._phone = component.querySelector('.js-location-form__phone');
+  }
+
+  _handleSubmit(event) {
+    const formIsValid = this._validate();
+
+    if (!formIsValid) {
+      event.preventDefault();
+    }
+  }
+
+  _validate() {
+    let formIsValid = true;
+
+    const nameValue = this._name.value.trim();
+    if (nameValue === '') {
+      formIsValid = false;
+      this._setErrorFor(this._name, 'Поле обязательно для заполнения');
+    } else if (nameValue.length < 2) {
+      formIsValid = false;
+      this._setErrorFor(this._name, 'Слишком мало символов');
+    }  else {
+      this._removeErrorFor(this._name);
+    }
+
+    const addressValue = this._address.value.trim();
+    if (addressValue === '') {
+      formIsValid = false;
+      this._setErrorFor(this._address, 'Поле обязательно для заполнения');
+    } else {
+      this._removeErrorFor(this._address);
+    }
+
+    const phoneValue = this._phone.value.trim();
+    if (phoneValue === '') {
+      formIsValid = false;
+      this._setErrorFor(this._phone, 'Поле обязательно для заполнения');
+    } else if (phoneValue.length !== 16) {
+      formIsValid = false;
+      this._setErrorFor(this._phone, 'Введите правильный телефон');
+    } else {
+      this._removeErrorFor(this._phone);
+    }
+
+    return formIsValid;
+  }
+
+  _setErrorFor(input, message) {
+    const formControl = input.closest('.js-form-control');
+
+    const previousErrorMessage = formControl.querySelector('.form-control__error-message');
+    if (previousErrorMessage) {
+      previousErrorMessage.remove();
+    }
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'form-control__error-message';
+    errorMessage.textContent = message;
+    
+    formControl.append(errorMessage);
+    formControl.classList.add('form-control_error');
+  }
+
+  _removeErrorFor(input) {
+    const formControl = input.closest('.js-form-control');
+    const errorMessage = formControl.querySelector('.form-control__error-message');
+    if (errorMessage) {
+      errorMessage.remove();
+      formControl.classList.remove('form-control_error');
+    }
+  }
+
+  _attachEventHandlers() {
+    this._component.addEventListener('submit', this._handleSubmit.bind(this));
+  }
+}
+
+const locationForm = document.querySelector('.js-location-page__form');
+if (locationForm) {
+  new LocationForm(locationForm);
+}
+/* End Location Form */
