@@ -258,18 +258,26 @@ class Select {
     this._initFields(component);
     this._handleOutsideClick = this._handleOutsideClick.bind(this);
     this._attachEventHandlers();
+    this._setSelectedValueIfNecessary();
   }
 
   toggle() {
     this._component.classList.toggle('select_opened');
 
     if (this._component.classList.contains('select_opened')) {
-      this._input.placeholder = 'Выберите форму организации';
+      const focusPlaceholder = this._input.dataset.focusPlaceholder;
+      if (focusPlaceholder) {
+        this._input.placeholder = focusPlaceholder;
+      }
+
       window.addEventListener('click', this._handleOutsideClick);
     }
 
     if (!this._component.classList.contains('select_opened')) {
-      this._input.placeholder = 'Не выбрано';
+      if (this._initialPlaceholder) {
+        this._input.placeholder = this._initialPlaceholder;
+      }
+
       window.removeEventListener('click', this._handleOutsideClick);
     }
   } 
@@ -278,10 +286,33 @@ class Select {
     this._component = component;
     this._input = component.querySelector('.js-select__input');
     this._items = component.querySelectorAll('.js-select__item');
+    this._initialPlaceholder = this._input.placeholder;
   }
 
-  _handleInputClick() {
-    this.toggle();
+  _setSelectedValueIfNecessary() {
+    this._items.forEach((item) => {
+      if (item.classList.contains('select__item_selected')) {
+        this._input.value = item.textContent;
+
+        if (this._input.classList.contains('js-select__input_width_auto')) {
+          this._adjustInputWidth();
+        }
+      }
+    });
+  }
+
+  _adjustInputWidth() {
+    const style = window.getComputedStyle(this._input);
+    const leftPadding = parseInt(style.paddingLeft);
+    const rightPadding = parseInt(style.paddingRight);
+    const valueWidth = (this._input.value.length) * 8;
+
+    this._input.style.width = '100%';
+    const maxWidth = parseInt(window.getComputedStyle(this._input).width);
+
+    const desiredWidth = leftPadding + valueWidth + rightPadding;
+    
+    this._input.style.width = `${Math.min(maxWidth, desiredWidth)}px`;
   }
 
   _handleItemClick(item) {
@@ -293,6 +324,10 @@ class Select {
     this._input.value = item.textContent;
     this._input.dispatchEvent(new Event('change'));
     this.toggle();
+
+    if (this._input.classList.contains('js-select__input_width_auto')) {
+      this._adjustInputWidth();
+    }
   }
 
   _handleOutsideClick(event) {
@@ -305,11 +340,11 @@ class Select {
   }
 
   _attachEventHandlers() {
-    this._input.addEventListener('click', this._handleInputClick.bind(this));
+    this._input.addEventListener('click', this.toggle.bind(this));
 
     this._items.forEach((item) => {
       item.addEventListener('click', this._handleItemClick.bind(this, item));
-    })
+    });
   }
 }
 
@@ -650,3 +685,155 @@ if (locationForm) {
   new LocationForm(locationForm);
 }
 /* End Location Form */
+
+/* Status Filter */
+class StatusFilter {
+  constructor(component) {
+    this._initFields(component);
+    this._handleOutsideClick = this._handleOutsideClick.bind(this);
+    this._attachEventHandlers();
+  }
+
+  toggle() {
+    this._component.classList.toggle('status-filter_opened');
+
+    if (this._component.classList.contains('status-filter_opened')) {
+      window.addEventListener('click', this._handleOutsideClick);
+    }
+
+    if (!this._component.classList.contains('status-filter_opened')) {
+      window.removeEventListener('click', this._handleOutsideClick);
+    }
+  }
+
+  _initFields(component) {
+    this._component = component;
+    this._list = component.querySelector('.js-status-filter__list');
+    this._items = component.querySelectorAll('.js-status-filter__item');
+    this._output = this._createOutputElement();
+
+    this._items.forEach((item) => {
+      if (item.classList.contains('status-filter__item_selected')) {
+        this._updateOutput(item);
+      }
+    });
+  }
+
+  _createOutputElement() {
+    const output = document.createElement('div');
+    output.className = 'status-filter__output';
+    this._component.prepend(output);
+    return output;
+  }
+
+  _updateOutput(item) {
+    const clone = document.createElement('div');
+    clone.innerHTML = item.innerHTML;
+    clone.classList = item.classList;
+    clone.classList.remove('status-filter__item_selected');
+
+    this._output.innerHTML = '';
+    this._output.append(clone);
+  }
+
+  _handleListMouseOver(event) {
+    if (event.target.classList.contains('status-filter__item')) {
+      this._list.style.setProperty('--underline-width', `${event.target.offsetWidth}px`);
+      this._list.style.setProperty('--underline-offset-x', `${event.target.offsetLeft}px`);
+    }
+  }
+
+  _handleListMouseLeave () {
+    this._list.style.setProperty('--underline-width', '0')
+  }
+
+  _handleItemClick(item) {
+    this._items.forEach((item) => {
+      item.classList.remove('status-filter__item_selected');
+    });
+
+    item.classList.add('status-filter__item_selected');
+    this._updateOutput(item);
+    this.toggle();
+  }
+
+  _handleOutsideClick(event) {
+    const { target } = event;
+    const clickOnSelect = this._component.contains(target);
+
+    if (!clickOnSelect) {
+      this.toggle();
+    }
+  }
+
+  _attachEventHandlers() {
+    this._list.addEventListener('mouseover', this._handleListMouseOver.bind(this));
+    this._list.addEventListener('mouseleave', this._handleListMouseLeave.bind(this));
+
+    this._items.forEach((item) => {
+      item.addEventListener('click', this._handleItemClick.bind(this, item));
+    });
+
+    this._output.addEventListener('click', this.toggle.bind(this));
+  }
+}
+
+const statusFilters = document.querySelectorAll('.js-status-filter');
+if (statusFilters) {
+  statusFilters.forEach((filter) => {
+    new StatusFilter(filter);
+  });
+}
+/* End Status Filter */
+
+/* Request Names on Request Page */
+class RequestNamesOnRequestPageHandler {
+  constructor(elements) {
+    this._names = elements;
+    this._attachEventHandlers();
+
+    if (this._isListInTableForm()) {
+      this._cropNames();
+    }
+  }
+
+  _cropNames() {
+    this._names.forEach((name) => {
+      if (name.textContent.length > 19) {
+        name.textContent = `${name.textContent.slice(0, 19)}...`
+      }
+    });
+  }
+
+  _restoreNames() {
+    this._names.forEach((name) => {
+      name.textContent = name.getAttribute('title');
+    });
+  }
+
+  _isListInTableForm() {
+    if (window.innerWidth > 991) {
+      return true;
+    } else {
+      return false;
+    } 
+  }
+
+  _handleWindowResize() {
+    if (this._isListInTableForm()) {
+      this._cropNames();
+    } else {
+      this._restoreNames();
+    }
+  } 
+
+  _attachEventHandlers() {
+    window.addEventListener('resize', this._handleWindowResize.bind(this));
+  }
+}
+
+const requestNamesOnRequestPage = document.querySelectorAll('.js-requests-page__request-name');
+if (requestNamesOnRequestPage) {
+  new RequestNamesOnRequestPageHandler(requestNamesOnRequestPage);
+}
+/* End Request Names on Request Page */

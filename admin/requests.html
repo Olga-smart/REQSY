@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Requests</title>
+</head>
+<body class="page">  
+  <main class="page__content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Главная</a></li>
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Личный кабинет</a></li>
+          <li class="breadcrumb__item" aria-current="page">Заявки</li>
+        </ol>
+      </nav>
+      <div class="requests-page">
+        <h1 class="page__heading">Заявки</h1>
+        <div class="requests-page__body">
+          <ul class="side-menu">
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Моё</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="./locations.html" class="side-menu__link">Локации</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link side-menu__item_active">Заявки</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Мои данные</a>
+            </li>
+          </ul>
+          <div class="requests-page__content">
+            <div class="requests-page__search-and-create-wrapper">
+              <form class="requests-page__search-form">
+                <input type="text" class="search-input" placeholder="Поиск заявки" name="
+                search-query">
+              </form>
+              <button class="button button_secondary button_icon_plus requests-page__create-button">
+                <span class="button__text">Создать заявку</span>                
+              </button>
+            </div>
+            <div class="requests-page__filters">
+              <div class="requests-page__company-filter">
+                <div class="select js-select select_theme_compact">
+                  <label for="companySelect" class="select__label">Организация:</label>
+                  <div class="select__select">
+                    <div class="select__input-wrapper ">
+                      <input type="text" class="select__input js-select__input js-select__input_width_auto" id="companySelect" name="form" readonly>
+                    </div>              
+                    <ul class="select__options">
+                      <li class="select__item js-select__item select__item_selected">Все</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Имя компании</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Все</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Имя компании</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Все</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Имя компании</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Все</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item">Имя компании</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                    </ul>
+                  </div>            
+                </div>
+              </div>              
+              <div class="requests-page__status-filter">
+                <div class="status-filter js-status-filter">
+                  <ul class="status-filter__list js-status-filter__list">
+                    <li class="status-filter__item js-status-filter__item status-filter__item_all status-filter__item_selected">Все заявки</li>
+                    <li class="status-filter__item js-status-filter__item status-filter__item_new">Новые</li>
+                    <li class="status-filter__item js-status-filter__item status-filter__item_work">В работе</li>
+                    <li class="status-filter__item js-status-filter__item status-filter__item_done">Выполнено</li>
+                    <li class="status-filter__item js-status-filter__item status-filter__item_completed">Завершённые</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="requests-page__table-header">
+              <div>Название организации</div>
+              <div>Дата заявки</div>
+              <div>Название заявки</div>
+              <div>Статус заявки</div>
+            </div>
+            <div class="requests-page__list">
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="Имя компании И.И. Иванова много много слов очень длинное название компании">Имя компании И.И. Иванова много много слов очень длинное название компании</span>
+                <time class="requests-page__date" datetime="2023-10-10">10.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Заявка от Иванова много много слов очень длинное название заявки">Заявка от Иванова много много слов очень длинное название заявки</span>
+                <span class="request-status request-status_work">В работе</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="ООО «Холдинг Групп»">ООО «Холдинг Групп»</span>
+                <time class="requests-page__date" datetime="2023-10-08">08.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки несколько слов">Название заявки несколько слов</span>
+                <span class="request-status request-status_new">Новая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="ИП Андреев Пётр Григорьевич">ИП Андреев Пётр Григорьевич</span>
+                <time class="requests-page__date" datetime="2023-10-07">07.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
+                <span class="request-status request-status_new">Новая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="Имя компании">Имя компании</span>
+                <time class="requests-page__date" datetime="2023-09-01">01.09.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
+                <span class="request-status request-status_completed">Завершённая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="Имя компании И.И. Иванова">Имя компании И.И. Иванова</span>
+                <time class="requests-page__date" datetime="2023-10-10">10.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Заявка от Иванова">Заявка от Иванова</span>
+                <span class="request-status request-status_work">В работе</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="ООО «Холдинг Групп»">ООО «Холдинг Групп»</span>
+                <time class="requests-page__date" datetime="2023-10-08">08.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки несколько слов">Название заявки несколько слов</span>
+                <span class="request-status request-status_new">Новая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="ИП Андреев Пётр Григорьевич">ИП Андреев Пётр Григорьевич</span>
+                <time class="requests-page__date" datetime="2023-10-07">07.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
+                <span class="request-status request-status_new">Новая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="Имя компании">Имя компании</span>
+                <time class="requests-page__date" datetime="2023-09-01">01.09.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
+                <span class="request-status request-status_completed">Завершённая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="Имя компании">Имя компании</span>
+                <time class="requests-page__date" datetime="2023-09-01">01.09.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
+                <span class="request-status request-status_completed">Завершённая</span>
+              </a>
+              <a href="./request.html" class="requests-page__item">
+                <span class="requests-page__company-name" title="Имя компании И.И. Иванова">Имя компании И.И. Иванова</span>
+                <time class="requests-page__date" datetime="2023-10-10">10.10.2023</time>
+                <span class="requests-page__request-name js-requests-page__request-name" title="Заявка от Иванова">Заявка от Иванова</span>
+                <span class="request-status request-status_work">В работе</span>
+              </a>
+            </div>
+            <nav class="pagination" aria-label="pagination">
+              <ul class="pagination__list">
+                <li class="pagination__item pagination__item_hidden">
+                  <a class="pagination__link pagination__link_prev" href="#">
+                    <span class="visually-hidden">назад</span>
+                  </a>
+                </li>
+                <li class="pagination__item pagination__item_active">
+                  <a class="pagination__link" href="#" aria-current="page">1</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">2</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">3</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link pagination__link_next" href="#">
+                    <span class="visually-hidden">вперед</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>          
+      </div>      
+    </div>
+    <button class="page__scroll-top-button js-page__scroll-top-button"></button>
+  </main>
+
+  <nav class="bottom-menu">
+    <div class="container">
+      <ul class="bottom-menu__list">
+        <li class="bottom-menu__item bottom-menu__item_my">
+          <a href="#" class="bottom-menu__link">Моё</a>
+          <span class="bottom-menu__badge">1</span>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_locations">
+          <a href="./locations.html" class="bottom-menu__link">Локации</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_requests bottom-menu__item_active">
+          <a href="#" class="bottom-menu__link">Заявки</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_profile">
+          <a href="#" class="bottom-menu__link">Мои данные</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <script src="../main.js"></script>
+</body>
+</html>
+

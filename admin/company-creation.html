@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
-  <title>Company  creation</title>
+  <title>Company creation</title>
 </head>
 <body class="page">
   <main class="page__content">
@@ -24,7 +24,7 @@
               <label for="orgFormSelect" class="select__label org-form-select__label">Форма организации:</label>
               <div class="select__select org-form-select__select">
                 <div class="select__input-wrapper">
-                  <input type="text" class="select__input js-select__input js-company-creation-form__org-form" id="orgFormSelect" placeholder="Не выбрано" name="form" readonly>
+                  <input type="text" class="select__input js-select__input js-company-creation-form__org-form" id="orgFormSelect" placeholder="Не выбрано" data-focus-placeholder="Выберите форму организации" name="form" readonly>
                 </div>              
                 <ul class="select__options">
                   <li class="select__item js-select__item" data-value="individual">Физическое лицо</li>
@@ -64,7 +64,9 @@
             <div class="img-uploader__img-area js-img-uploader__img-area" style="background-image: url(../img/company-logo-placeholder.svg)"></div>
             <div class="img-uploader__button-area">
               <span>Загрузите логотип компании</span>
-              <button class="button button_secondary button_icon_plus js-img-uploader__button" type="button">Добавить</button>
+              <button class="button button_secondary button_icon_plus js-img-uploader__button" type="button">
+                <span class="button__text">Добавить</span>
+              </button>
             </div>
           </div>
         </div>
