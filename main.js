@@ -1,6 +1,6 @@
 "use strict";
 
-/* Img Uploader */
+// #region Img Uploader
 class ImageUploader {
   constructor(component) {
     this._initFields(component);
@@ -10,7 +10,7 @@ class ImageUploader {
   _initFields(component) {
     this._component = component;
     this._input = component.querySelector('.js-img-uploader__input');
-    this._imageArea = component.querySelector('.js-img-uploader__img-area');
+    this._imageAreas = Array.from(component.querySelectorAll('.js-img-uploader__img-area'));
     this._button = component.querySelector('.js-img-uploader__button');
   }
 
@@ -19,23 +19,35 @@ class ImageUploader {
   }
 
   _handleInputChange() {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const prevImage = this._imageArea.querySelector('.js-img-uploader__img');
-      if (prevImage) {
-        prevImage.remove();
-      }
-      const img = document.createElement('img');
-      img.src = reader.result;
-      img.className = 'img-uploader__img js-img-uploader__img';
-      img.alt = 'Фото профиля';
-      this._imageArea.append(img);
-    };
+    const images = this._input.files;
 
-    const image = this._input.files[0];
-    if (image) {
-      reader.readAsDataURL(image);
-    }    
+    if (images) {
+      this._removePreviousImages();
+
+      for (let i = 0; i < 3; i++) {
+        if (!images[i]) return;
+
+        const reader = new FileReader();
+
+        reader.onload = () => {    
+          const img = document.createElement('img');
+          img.src = reader.result;
+          img.className = 'img-uploader__img js-img-uploader__img';
+          this._imageAreas[this._imageAreas.length - (i + 1)].append(img);
+        };
+
+        reader.readAsDataURL(images[i]);
+      }
+    }
+  }
+
+  _removePreviousImages() {
+    this._imageAreas.forEach((area) => {
+      const image = area.querySelector('.js-img-uploader__img');
+      if (image) {
+        image.remove();
+      }
+    });
   }
 
   _attachEventHandlers() {
@@ -50,9 +62,9 @@ if (imageUploaders) {
     new ImageUploader(uploader);
   });
 }
-/* End Img Uploader */
+// #endregion Img Uploader
 
-/* Phone Mask */
+// #region Phone Mask
 const telInputs = document.querySelectorAll('.js-input_phone');
 if (telInputs) {
   telInputs.forEach((input) => {
@@ -73,9 +85,9 @@ if (telInputs) {
     });
   });
 }
-/* End Phone Mask */
+// #endregion Phone Mask
 
-/* Registration Form */
+// #region Registration Form
 class RegistrationForm {
   constructor(component) {
     this._initFields(component);
@@ -209,9 +221,9 @@ const registrationForm = document.querySelector('.js-registration-form');
 if (registrationForm) {
   new RegistrationForm(registrationForm);
 }
-/* End Registration Form */
+// #endregion Registration Form
 
-/* Modal */
+// #region Modal
 class Modal {
   constructor(component) {
     this._initFields(component);
@@ -250,9 +262,9 @@ if (modals) {
     new Modal(modal);
   });
 }
-/* End Modal */
+// #endregion Modal
 
-/* Select */
+// #region Select
 class Select {
   constructor(component) {
     this._initFields(component);
@@ -354,9 +366,9 @@ if (selects) {
     new Select(select);
   });
 }
-/* End Select */
+// #endregion Select
 
-/* Company Creation Form */
+// #region Company Creation Form
 class CompanyCreationForm {
   constructor(component) {
     this._initFields(component);
@@ -482,9 +494,9 @@ const companyCreationForm = document.querySelector('.js-company-creation-form');
 if (companyCreationForm) {
   new CompanyCreationForm(companyCreationForm);
 }
-/* End Company Creation Form */
+// #endregion Company Creation Form
 
-/* Scroll Top Button */
+// #region Scroll Top Button
 class ScrollTopButton {
   constructor(component) {
     this._initFields(component);
@@ -533,9 +545,9 @@ const scrollTopButton = document.querySelector('.js-page__scroll-top-button');
 if (scrollTopButton) {
   new ScrollTopButton(scrollTopButton);
 }
-/* End Scroll Top Button */
+// #endregion Scroll Top Button
 
-/* Coords Mask */
+// #region Coords Mask
 const coordsInputs = document.querySelectorAll('.js-input_coords');
 if (coordsInputs) {
   coordsInputs.forEach((input) => {
@@ -548,9 +560,9 @@ if (coordsInputs) {
     });
   });
 }
-/* End Coords Mask */
+// #endregion Coords Mask
 
-/* Time Mask */
+// #region Time Mask
 const timeInputs = document.querySelectorAll('.js-input_time');
 if (timeInputs) {
   timeInputs.forEach((input) => {
@@ -589,9 +601,9 @@ if (timeInputs) {
     });
   });
 }
-/* End Time Mask */
+// #endregion Time Mask
 
-/* Location Form */
+// #region Location Form
 class LocationForm {
   constructor(component) {
     this._initFields(component);
@@ -684,9 +696,9 @@ const locationForm = document.querySelector('.js-location-page__form');
 if (locationForm) {
   new LocationForm(locationForm);
 }
-/* End Location Form */
+// #endregion Location Form
 
-/* Status Filter */
+// #region Status Filter
 class StatusFilter {
   constructor(component) {
     this._initFields(component);
@@ -784,17 +796,24 @@ if (statusFilters) {
     new StatusFilter(filter);
   });
 }
-/* End Status Filter */
+// #endregion Status Filter
 
-/* Request Names on Request Page */
-class RequestNamesOnRequestPageHandler {
-  constructor(elements) {
-    this._names = elements;
+// #region Requests Page
+class RequestsPage {
+  constructor(component) {
+    this._initFields(component);
     this._attachEventHandlers();
 
     if (this._isListInTableForm()) {
       this._cropNames();
     }
+  }
+
+  _initFields(component) {
+    this._component = component;
+    this._names = component.querySelectorAll('.js-requests-page__request-name');
+    this._createRequestButton = component.querySelector('.js-requests-page__create-button');
+    this._requestCreationModal = document.querySelector('.js-request-creation-modal');
   }
 
   _cropNames() {
@@ -825,15 +844,104 @@ class RequestNamesOnRequestPageHandler {
     } else {
       this._restoreNames();
     }
-  } 
+  }
+
+  _handleCreateRequestButtonClick() {
+    this._requestCreationModal.classList.add('modal_opened');
+  }
 
   _attachEventHandlers() {
     window.addEventListener('resize', this._handleWindowResize.bind(this));
+    this._createRequestButton?.addEventListener('click', this._handleCreateRequestButtonClick.bind(this));
   }
 }
 
-const requestNamesOnRequestPage = document.querySelectorAll('.js-requests-page__request-name');
-if (requestNamesOnRequestPage) {
-  new RequestNamesOnRequestPageHandler(requestNamesOnRequestPage);
+const requestsPage = document.querySelector('.js-requests-page');
+if (requestsPage) {
+  new RequestsPage(requestsPage);
 }
-/* End Request Names on Request Page */
+// #endregion Requests Page
+
+// #region Request Creation Form
+class RequestCreationForm {
+  constructor(component) {
+    this._initFields(component);
+    this._attachEventHandlers();
+  }
+
+  _initFields(component) {
+    this._component = component;
+    this._name = component.querySelector('.js-request-creation-form__name');
+    this._description = component.querySelector('.js-request-creation-form__description');
+  }
+
+  _handleSubmit(event) {
+    const formIsValid = this._validate();
+
+    if (!formIsValid) {
+      event.preventDefault();
+    }
+  }
+
+  _validate() {
+    let formIsValid = true;
+
+    const nameValue = this._name.value.trim();
+    if (nameValue === '') {
+      formIsValid = false;
+      this._setErrorFor(this._name, 'Поле обязательно для заполнения');
+    } else if (nameValue.length < 3) {
+      formIsValid = false;
+      this._setErrorFor(this._name, 'Слишком мало символов');
+    } else {
+      this._removeErrorFor(this._name);
+    }
+
+    const descriptionValue = this._description.value.trim();
+    if (descriptionValue === '') {
+      formIsValid = false;
+      this._setErrorFor(this._description, 'Поле обязательно для заполнения');
+    } else if (descriptionValue.length < 3) {
+      formIsValid = false;
+      this._setErrorFor(this._description, 'Слишком мало символов');
+    }  else {
+      this._removeErrorFor(this._description);
+    }
+
+    return formIsValid;
+  }
+
+  _setErrorFor(input, message) {
+    const formControl = input.closest('.js-form-control');
+
+    const previousErrorMessage = formControl.querySelector('.form-control__error-message');
+    if (previousErrorMessage) {
+      previousErrorMessage.remove();
+    }
+    const errorMessage = document.createElement('div');
+    errorMessage.className = 'form-control__error-message';
+    errorMessage.textContent = message;
+    
+    formControl.append(errorMessage);
+    formControl.classList.add('form-control_error');
+  }
+
+  _removeErrorFor(input) {
+    const formControl = input.closest('.js-form-control');
+    const errorMessage = formControl.querySelector('.form-control__error-message');
+    if (errorMessage) {
+      errorMessage.remove();
+      formControl.classList.remove('form-control_error');
+    }
+  }
+
+  _attachEventHandlers() {
+    this._component.addEventListener('submit', this._handleSubmit.bind(this));
+  }
+}
+
+const requestCreationForm = document.querySelector('.js-request-creation-form');
+if (requestCreationForm) {
+  new RequestCreationForm(requestCreationForm);
+}
+// #endregion Request Creation Form

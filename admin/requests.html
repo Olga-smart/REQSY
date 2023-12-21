@@ -16,7 +16,7 @@
           <li class="breadcrumb__item" aria-current="page">Заявки</li>
         </ol>
       </nav>
-      <div class="requests-page">
+      <div class="requests-page js-requests-page">
         <h1 class="page__heading">Заявки</h1>
         <div class="requests-page__body">
           <ul class="side-menu">
@@ -39,7 +39,7 @@
                 <input type="text" class="search-input" placeholder="Поиск заявки" name="
                 search-query">
               </form>
-              <button class="button button_secondary button_icon_plus requests-page__create-button">
+              <button class="button button_secondary button_icon_plus requests-page__create-button js-requests-page__create-button">
                 <span class="button__text">Создать заявку</span>                
               </button>
             </div>
@@ -220,6 +220,42 @@
       </ul>
     </div>
   </nav>
+
+  <div class="modal js-modal request-creation-modal js-request-creation-modal">
+    <div class="modal__window js-modal__window request-creation-modal__window">
+      <div class="modal__body request-creation-modal__body">
+        <button class="modal__close-button js-modal__close-button">✕<span class="visually-hidden">Закрыть</span></button>
+        <p class="request-creation-modal__heading">Создание заявки</p>
+        <form action="" class="request-creation-modal__form js-request-creation-form">
+          <div class="request-creation-modal__img-uploader">
+            <div class="img-uploader js-img-uploader img-uploader_multi">
+              <input type="file" accept="image/*" class="visually-hidden js-img-uploader__input" name="photo" multiple>
+              <div class="img-uploader__img-area-wrapper">
+                <div class="img-uploader__img-area js-img-uploader__img-area"></div>
+                <div class="img-uploader__img-area js-img-uploader__img-area"></div>
+                <div class="img-uploader__img-area js-img-uploader__img-area" style="background-image: url(../img/img-placeholder.svg)"></div>
+              </div>
+              <div class="img-uploader__button-area">
+                <span>Добавьте фотографии неисправности</span>
+                <button class="button button_secondary button_icon_plus img-uploader__button js-img-uploader__button" type="button">
+                  <span class="button__text">Загрузить</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="form-control js-form-control">
+            <label for="requestName" class="visually-hidden">Название заявки</label>
+            <input type="text" id="requestName" class="input request-creation-modal__name js-request-creation-form__name" name="name" placeholder="Название заявки">
+          </div>
+          <div class="form-control js-form-control">
+            <label for="requestDescription" class="visually-hidden">Описание</label>
+            <input type="text" id="requestDescription" class="input js-request-creation-form__description" name="description" placeholder="Описание">
+          </div>
+          <button class="button request-creation-modal__submit-button">Создать</button>
+        </form>
+      </div>    
+    </div>
+  </div>
   
   <script src="../main.js"></script>
 </body>

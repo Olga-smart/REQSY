@@ -1,4 +1,4 @@
-/* Fonts */
+/* #region Fonts */
 @font-face {
   font-family: 'PT Sans';
   src: url('./fonts/pt-sans/pt-sans-regular.woff2') format('woff2'),
@@ -31,9 +31,9 @@
   font-style: normal;
   font-display: swap;
 }
-/* End Fonts */
+/* #endregion Fonts */
 
-/* General */
+/* #region General */
 :root {
   --main-text-color: #0D2C3D;
   --secondary-color: #E7F3FA;
@@ -86,9 +86,9 @@ a {
   width: 100%;
   height: auto;
 }
-/* End General */
+/* #endregion General */
 
-/* Page */
+/* #region Page */
 .page {
   min-height: 100%;
   margin: 0;
@@ -145,9 +145,9 @@ a {
 .page__scroll-top-button_visible {
   display: block;
 }
-/* End Page */
+/* #endregion Page */
 
-/* Media Page */
+/* #region Media Page */
 @media (max-width: 575px) {
   .page__heading {
     margin-bottom: 1.5rem;
@@ -156,9 +156,9 @@ a {
     margin: 0;
   }
 }
-/* End Media Page */
+/* #endregion Media Page */
 
-/* Breadcrumb */
+/* #region Breadcrumb */
 .breadcrumb {
   margin-bottom: 1.5rem;
   -webkit-user-select: none;
@@ -191,9 +191,9 @@ a {
   text-decoration: none;
   color: inherit;
 }
-/* End Breadcrumb */
+/* #endregion Breadcrumb */
 
-/* Form Elements */
+/* #region Form Elements */
 .input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
@@ -391,18 +391,18 @@ a {
   padding: 0;
   margin: 0;
 }
-/* End Form Elements */
+/* #endregion Form Elements */
 
-/* Media Form Elements */
+/* #region Media Form Elements */
 @media (max-width: 575px) {
   .input_address {
     padding-left: 2rem;
     background-position: left .8rem bottom .5rem;
   }
 }
-/* End Media Form Elements */
+/* #endregion Media Form Elements */
 
-/* Button */
+/* #region Button */
 .button {
   padding: .9rem 2.2rem;
   border: none;
@@ -469,9 +469,9 @@ a {
 .button_icon_plus:hover .button__text::after {
   left: 0.5rem;
 }
-/* End Button */
+/* #endregion Button */
 
-/* Img Uploader */
+/* #region Img Uploader */
 .img-uploader {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -491,8 +491,8 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-          -webkit-box-shadow: 0 0 .5rem var(--success-color);
-                  box-shadow: 0 0 .5rem var(--success-color);
+  -webkit-box-shadow: 0 0 .5rem var(--success-color);
+          box-shadow: 0 0 .5rem var(--success-color);
   overflow: hidden;
   position: relative;
   -webkit-transition: all 0.2s ease-in-out;
@@ -530,18 +530,48 @@ a {
       -ms-flex-align: start;
           align-items: flex-start;      
 }
-/* End Img Uploader */
+.img-uploader_multi {
+  -webkit-column-gap: 2.6rem;
+     -moz-column-gap: 2.6rem;
+          column-gap: 2.6rem;
+}
+.img-uploader_multi .img-uploader__img-area-wrapper {
+  position: relative;
+}
+.img-uploader_multi .img-uploader__img-area {
+  border-radius: .5rem;
+  background-color: var(--secondary-color);
+}
+.img-uploader_multi .img-uploader__img-area:nth-child(1),
+.img-uploader_multi .img-uploader__img-area:nth-child(2) {
+  position: absolute;
+  top: 0;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.img-uploader_multi .img-uploader__img-area:nth-child(2) {
+  left: .7rem;
+}
+.img-uploader_multi .img-uploader__img-area:nth-child(1) {
+  left: 1.4rem;
+}
+.img-uploader_multi .img-uploader__button-area {
+  text-align: center;
+  row-gap: .5rem;
+  line-height: 1.2;
+}
+/* #endregion Img Uploader */
 
-/* Media Img Uploader */
+/* #region Media Img Uploader */
 @media (max-width: 991px) {
-  .img-uploader {
+  .img-uploader:not(.img-uploader_multi) {
     -webkit-column-gap: 1rem;
        -moz-column-gap: 1rem;
             column-gap: 1rem;
   }
 }
 @media (max-width: 991px) {
-  .img-uploader {
+  .img-uploader:not(.img-uploader_multi) {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -562,9 +592,33 @@ a {
             align-items: center;
   }
 }
-/* End Media Img Uploader */
+@media (max-width: 575px) {
+  .img-uploader_multi {
+    -webkit-column-gap: 1.55rem;
+       -moz-column-gap: 1.55rem;
+            column-gap: 1.55rem;
+  }
+  .img-uploader_multi .img-uploader__img-area {
+    width: 6rem;
+    height: 6rem;
+  }
+  .img-uploader_multi .img-uploader__button-area {
+    text-align: left;
+    font-size: .8rem;
+    row-gap: .75rem;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .img-uploader_multi .img-uploader__button {
+    font-size: .9rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+}
+/* #endregion Media Img Uploader */
 
-/* Registration Form */
+/* #region Registration Form */
 .registration-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -588,9 +642,9 @@ a {
       -ms-flex-align: start;
           align-items: flex-start;  
 }
-/* End Registration Form */
+/* #endregion Registration Form */
 
-/* Media Registration Form */
+/* #region Media Registration Form */
 @media (max-width: 991px) {
   .registration-form {
     -webkit-column-gap: 2rem;
@@ -610,9 +664,9 @@ a {
     width: 100%;
   }
 }
-/* End Media Registration Form */
+/* #endregion Media Registration Form */
 
-/* Modal */
+/* #region Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -648,6 +702,7 @@ a {
   height: 100%;
   position: relative;
   border-radius: inherit;
+  position: relative;
 }
 .modal__close-button {
   position: absolute;
@@ -661,7 +716,7 @@ a {
   color: var(--main-text-color);
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;        
 }
 .modal__close-button:hover {
   color: #000;
@@ -669,12 +724,11 @@ a {
       -ms-transform: scale(1.15);
           transform: scale(1.15);
 }
-/* End Modal */
+/* #endregion Modal */
 
-/* Registration Modal */
+/* #region Registration Modal */
 .registration-modal__window {
   width: 27.15rem;
-  /* height: 34.25rem;  */
 }
 .registration-modal__body {
   background-color: var(--secondary-color);
@@ -690,9 +744,9 @@ a {
   line-height: normal;
   letter-spacing: .04rem;
 }
-/* End Registration Modal */
+/* #endregion Registration Modal */
 
-/* Media Registration Modal */
+/* #region Media Registration Modal */
 @media (max-width: 575px) {
   .registration-modal__window {
     min-height: 28.15rem;
@@ -719,9 +773,57 @@ a {
     background-size: 45%;
   }
 }
-/* End Media Registration Modal */
+/* #endregion Media Registration Modal */
 
-/* Company Creation Form */
+/* #region Request Creation Modal */
+.request-creation-modal__window {
+  width: 25.3rem
+}
+.request-creation-modal__body {
+  padding: 1.7rem;
+}
+.request-creation-modal__heading {
+  margin: 0;
+  margin-bottom: 1.45rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: .024rem;
+  text-align: center;
+}
+.request-creation-modal__img-uploader {
+  padding-left: .4rem;
+  padding-right: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.request-creation-modal__name {
+  margin-bottom: .35rem;
+}
+.request-creation-modal__submit-button {
+  width: 100%;
+  margin-top: 2.9rem;
+}
+/* #endregion Request Creation Modal */
+
+/* #region Media Request Creation Modal */
+@media (max-width: 575px) {
+  .request-creation-modal__body {
+    padding: 1rem;
+    padding-bottom: 1.95rem;
+  }
+  .request-creation-modal__heading {
+    margin-bottom: 1.7rem;
+  }
+  .request-creation-modal__img-uploader {
+    padding: 0;
+    margin-bottom: 2rem;
+  }
+  .request-creation-modal__submit-button {
+    margin-top: 1.5rem;
+  }
+}
+/* #endregion Media Request Creation Modal */
+
+/* #region Company Creation Form */
 .company-creation-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -745,9 +847,9 @@ a {
       -ms-flex-align: start;
           align-items: flex-start;  
 }
-/* End Company Creation Form */
+/* #endregion Company Creation Form */
 
-/* Media Company Creation Form */
+/* #region Media Company Creation Form */
 @media (max-width: 991px) {
   .company-creation-form {
     -webkit-column-gap: 2rem;
@@ -767,9 +869,9 @@ a {
     width: 100%;
   }
 }
-/* End Media Company Creation Form */
+/* #endregion Media Company Creation Form */
 
-/* Select */
+/* #region Select */
 .select {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -973,9 +1075,9 @@ a {
   background-position: center;
   background-size: contain;
 }
-/* End Select */
+/* #endregion Select */
 
-/* Organization Form Select */
+/* #region Organization Form Select */
 .org-form-select {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1001,17 +1103,17 @@ a {
   -ms-flex-negative: 0;
       flex-shrink: 0;
 }
-/* End Organization Form Select */
+/* #endregion Organization Form Select */
 
-/* Media Organization Form Select */
+/* #region Media Organization Form Select */
 @media (max-width: 575px) {
   .org-form-select__select {
     width: 100%;
   }
 }
-/* End Media Organization Form Select */
+/* #endregion Media Organization Form Select */
 
-/* Locations Page */
+/* #region Locations Page */
 .locations-page {
   max-width: 62.5rem;
 }
@@ -1109,9 +1211,9 @@ a {
   display: block;
   margin-top: .25rem; 
 }
-/* End Locations Page */
+/* #endregion Locations Page */
 
-/* Media Locations Page */
+/* #region Media Locations Page */
 @media (max-width: 991px) {
   .locations-page__list {
     grid-template-columns: 1fr;
@@ -1149,9 +1251,9 @@ a {
     background-position: left .75rem top 1.15rem;
   }
 }
-/* End Media Locations Page */
+/* #endregion Media Locations Page */
 
-/* Side Menu */
+/* #region Side Menu */
 .side-menu {
   width: 11.65rem;
   margin: 0;
@@ -1188,17 +1290,17 @@ a {
 .side-menu__link:hover {
   background-color: #EFEFEF;
 }
-/* End Side Menu */
+/* #endregion Side Menu */
 
-/* Media Side Menu */
+/* #region Media Side Menu */
 @media (max-width: 767px) {
   .side-menu {
     display: none;
   }
 }
-/* End Media Side Menu */
+/* #endregion Media Side Menu */
 
-/* Bottom Menu */
+/* #region Bottom Menu */
 .bottom-menu {
   position: fixed;
   bottom: 0;
@@ -1294,17 +1396,17 @@ a {
   font-family: 'Roboto Condensed', 'Arial', sans-serif;
   padding: 0 .3rem;
 }
-/* End Bottom Menu */
+/* #endregion Bottom Menu */
 
-/* Media Bottom Menu */
+/* #region Media Bottom Menu */
 @media (max-width: 767px) {
   .bottom-menu {
     display: block;
   }
 }
-/* End Media Bottom Menu */
+/* #endregion Media Bottom Menu */
 
-/* Pagination */
+/* #region Pagination */
 .pagination {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1389,9 +1491,9 @@ a {
       -ms-transform: scale(1.4);
           transform: scale(1.4);
 }
-/* End Pagination */
+/* #endregion Pagination */
 
-/* Media  Pagination */
+/* #region Media Pagination */
 @media (max-width: 767px) {
   .pagination {
     -webkit-box-pack: center;
@@ -1399,9 +1501,9 @@ a {
             justify-content: center;
   }
 }
-/* End Media Pagination */
+/* #endregion Media Pagination */
 
-/* Location Page */
+/* #region Location Page */
 .location-page {
   max-width: 41rem;
 }
@@ -1578,9 +1680,9 @@ a {
       -ms-transform: translateX(.75rem);
           transform: translateX(.75rem);
 }
-/* End Location Page */
+/* #endregion Location Page */
 
-/* Media Location Page */
+/* #region Media Location Page */
 @media (max-width: 767px) {
   .location-page__body {
     grid-template-columns: 1fr;
@@ -1619,9 +1721,9 @@ a {
     width: 100%;
   }
 }
-/* End Media Location Page */
+/* #endregion Media Location Page */
 
-/* Requests Page */
+/* #region Requests Page */
 .requests-page__body {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -1741,9 +1843,9 @@ a {
 .requests-page__accept-button:hover {
   outline-color: var(--success-color);
 }
-/* End Requests Page */
+/* #endregion Requests Page */
 
-/* Media Requests Page */
+/* #region Media Requests Page */
 @media (max-width: 1399px) {
   .requests-page__filters {
     display: -webkit-box;
@@ -1870,9 +1972,9 @@ a {
             column-gap: 0;
   }
 }
-/* End Media Requests Page */
+/* #endregion Media Requests Page */
 
-/* Request Status */
+/* #region Request Status */
 .request-status {
   color: #343434;
   padding-left: 13px;
@@ -1905,9 +2007,9 @@ a {
 .request-status_completed::before {
   border-color: var(--danger-color);
 }
-/* End Request Status */
+/* #endregion Request Status */
 
-/* Status Filter */
+/* #region Status Filter */
 .status-filter {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2034,9 +2136,9 @@ a {
 .status-filter__item_selected::after {
   background-color: var(--main-text-color);
 }
-/* End Status Filter */
+/* #endregion Status Filter */
 
-/* Media Status Filter */
+/* #region Media Status Filter */
 @media (max-width: 1199px) {
   .status-filter__output {
     display: block;
@@ -2081,4 +2183,4 @@ a {
     background-color: var(--success-transparent-color);
   }
 }
-/* End Media Status Filter */
+/* #endregion Media Status Filter */
