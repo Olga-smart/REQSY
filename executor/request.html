@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../libs/venobox/venobox.min.css">
+  <title>Request</title>
+</head>
+<body class="page">  
+  <main class="page__content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Главная</a></li>
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Личный кабинет</a></li>
+          <li class="breadcrumb__item">Заявки</li>
+          <li class="breadcrumb__item" aria-current="page">Название заявки</li>
+        </ol>
+      </nav>
+      <div class="request-page">
+        <h1 class="page__heading">Название заявки</h1>
+        <div class="request-page__body">
+          <ul class="side-menu">
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Моё</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="./locations.html" class="side-menu__link">Локации</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link side-menu__item_active">Заявки</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Мои данные</a>
+            </li>
+          </ul>
+          <div class="request-page__content">
+            <dl class="request-page__fields">
+              <div class="request-page__status-and-dates-wrapper">
+                <div class="request-page__status-group">
+                  <dt class="request-page__field-label">Сменить статус:</dt>
+                  <dd class="request-page__field-info">
+                    <div class="status-selector js-status-selector">
+                      <div class="status-selector__output js-status-selector__output"></div>
+                      <ul class="status-selector__list js-status-selector__list">
+                        <li class="status-selector__item js-status-selector__item status-selector__item_selected">
+                          <span class="request-status js-request-status request-status_new">Новая</span>
+                        </li>
+                        <li class="status-selector__item js-status-selector__item">
+                          <span class="request-status js-request-status request-status_work">В работе</span>
+                        </li>
+                        <li class="status-selector__item js-status-selector__item">
+                          <span class="request-status js-request-status request-status_done">Выполненная</span>
+                        </li>
+                        <li class="status-selector__item js-status-selector__item">
+                          <span class="request-status js-request-status request-status_completed">Завершённая</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </dd>
+                </div>
+                <div class="request-page__dates-group">
+                  <dt class="request-page__field-label">Создано:</dt>
+                  <dd class="request-page__field-info">
+                    <time datetime="2023-10-10">10.10.2023</time>
+                  </dd>
+                  <dt class="request-page__field-label">Закрыто:</dt>
+                  <dd class="request-page__field-info">Нет</dd>
+                </div>
+              </div>              
+              <div class="request-page__address-group">
+                <dt class="request-page__field-label">Адрес:</dt>
+                <dd class="request-page__field-info request-page__address">Москва, Большой Палашевский пер., 2</dd>
+              </div>
+              <div class="request-page__employees-group">
+                <dt class="request-page__field-label">Создал заявку:</dt>
+                <dd class="request-page__field-info">
+                  <div class="request-page__employee">
+                    <img class="request-page__employee-avatar" src="../img/employee-1.jpg" alt="Пётр Соколов">
+                    Пётр Соколов
+                  </div>                  
+                </dd>
+                <dt class="request-page__field-label">Принял заявку:</dt>
+                <dd class="request-page__field-info">
+                  <div class="request-page__employee">
+                    <img class="request-page__employee-avatar" src="../img/employee-2.jpg" alt="Мария Иванова">
+                    Мария Иванова
+                  </div>
+                </dd>
+              </div>       
+            </dl>
+            <div class="request-page__card">
+              <div class="request-page__photos js-request-page__photos">
+                <div class="request-page__photo-area js-request-page__photo-area">
+                  <img src="../img/request-page-3.jpg" alt="" class="request-page__photo">
+                </div>
+                <div class="request-page__photo-area js-request-page__photo-area">
+                  <img src="../img/request-page-2.jpg" alt="" class="request-page__photo">
+                </div>
+                <div class="request-page__photo-area js-request-page__photo-area" style="background-image: url(../img/img-placeholder.svg)">
+                  <img src="../img/request-page-1.jpg" alt="" class="request-page__photo">
+                </div>
+                <div class="request-page__photos-for-view visually-hidden">
+                  <a class="venobox" data-gall="requestGallery" href="../img/request-page-1.jpg"></a>
+                  <a class="venobox" data-gall="requestGallery" href="../img/request-page-2.jpg"></a>
+                  <a class="venobox" data-gall="requestGallery" href="../img/request-page-3.jpg"></a>
+                  <a class="venobox" data-gall="requestGallery" href="https://images.unsplash.com/photo-1682687221038-404cb8830901"></a>
+                  <a class="venobox" data-gall="requestGallery" href="https://images.unsplash.com/photo-1702927706292-c57d75cf2143"></a>
+                  <a class="venobox" data-gall="requestGallery" href="https://images.unsplash.com/photo-1701743807240-9ee504f72417"></a>
+                </div>
+                <button class="request-page__view-photo-button js-request-page__view-photo-button"></button>
+              </div>
+              <div class="request-page__card-text">
+                <p class="request-page__location">Локация: Безымянный</p>
+                <p class="request-page__description">Описание проблемы: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent lobortis velit mollis erat pellentesque, eu varius neque scelerisque. Curabitur sem ligula, sodales in est eget, faucibus vehicula ligula. Suspendisse cursus cursus nisl, a mattis dolor rhoncus in. Integer quis sapien sollicitudin, semper tortor vel, porttitor justo.</p>
+              </div>
+            </div>
+            <a href="./requests.html" class="button request-page__requests-list-link">К списку заявок</a>
+          </div>
+        </div>         
+      </div>      
+    </div>
+    <button class="page__scroll-top-button js-page__scroll-top-button"></button>
+  </main>
+
+  <nav class="bottom-menu">
+    <div class="container">
+      <ul class="bottom-menu__list">
+        <li class="bottom-menu__item bottom-menu__item_my">
+          <a href="#" class="bottom-menu__link">Моё</a>
+          <span class="bottom-menu__badge">1</span>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_locations">
+          <a href="#" class="bottom-menu__link">Локации</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_requests bottom-menu__item_active">
+          <a href="#" class="bottom-menu__link">Заявки</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_profile">
+          <a href="#" class="bottom-menu__link">Мои данные</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <script src="../libs/venobox/venobox.min.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
+

@@ -945,3 +945,113 @@ if (requestCreationForm) {
   new RequestCreationForm(requestCreationForm);
 }
 // #endregion Request Creation Form
+
+// #region Status Selector
+class StatusSelector {
+  constructor(component) {
+    this._initFields(component);
+    this._handleOutsideClick = this._handleOutsideClick.bind(this);
+    this._attachEventHandlers();
+  }
+
+  toggle() {
+    this._component.classList.toggle('status-selector_opened');
+
+    if (this._component.classList.contains('status-selector_opened')) {
+      window.addEventListener('click', this._handleOutsideClick);
+    }
+
+    if (!this._component.classList.contains('status-selector_opened')) {
+      window.removeEventListener('click', this._handleOutsideClick);
+    }
+  }
+
+  _initFields(component) {
+    this._component = component;
+    this._output = component.querySelector('.js-status-selector__output');
+    this._list = component.querySelector('.js-status-selector__list');
+    this._items = component.querySelectorAll('.js-status-selector__item');
+
+    this._items.forEach((item) => {
+      if (item.classList.contains('status-selector__item_selected')) {
+        this._updateOutput(item);
+      }
+    });
+  }
+
+  _updateOutput(item) {
+    const statusElement = item.querySelector('.js-request-status');
+    const clone = statusElement.cloneNode(true);
+    this._output.innerHTML = '';
+    this._output.append(clone);
+  }
+
+  _handleItemClick(item) {
+    this._items.forEach((item) => {
+      item.classList.remove('status-selector__item_selected');
+    });
+
+    item.classList.add('status-selector__item_selected');
+    this._updateOutput(item);
+    this.toggle();
+  }
+
+  _handleOutsideClick(event) {
+    const { target } = event;
+    const clickOnSelect = this._component.contains(target);
+
+    if (!clickOnSelect) {
+      this.toggle();
+    }
+  }
+
+  _attachEventHandlers() {
+    this._items.forEach((item) => {
+      item.addEventListener('click', this._handleItemClick.bind(this, item));
+    });
+
+    this._output.addEventListener('click', this.toggle.bind(this));
+  }
+}
+
+const statusSelectors = document.querySelectorAll('.js-status-selector');
+if (statusSelectors) {
+  statusSelectors.forEach((selector) => {
+    new StatusSelector(selector);
+  });
+}
+// #endregion Status Selector
+
+// #region Request Page Photo Viewer
+class RequestPagePhotoGroup {
+  constructor(component) {
+    this._initFields(component);
+    this._attachEventHandlers();
+  }
+
+  _initFields(component) {
+    this._component = component;
+    this._button = component.querySelector('.js-request-page__view-photo-button');
+    this._venobox = new VenoBox({
+      numeration: true,
+      share: true,
+      overlayColor: 'rgba(0, 0, 0, 0.45)',
+    });
+  }
+
+  _handleButtonClick() {
+    this._component.querySelector('.venobox').dispatchEvent(new Event('click'));
+  }
+
+  _attachEventHandlers() {
+    this._button.addEventListener('click', this._handleButtonClick.bind(this));
+  }
+}
+
+const requestPagePhotoGroup = document.querySelectorAll('.js-request-page__photos');
+if (requestPagePhotoGroup) {
+  requestPagePhotoGroup.forEach((group) => {
+    new RequestPagePhotoGroup(group);
+  });
+}
+// #endregion Request Page Photo Viewer
