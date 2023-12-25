@@ -438,6 +438,10 @@ a {
   white-space: nowrap;
   text-align: center;
   text-decoration: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .button:hover {
   opacity: 0.85;
@@ -906,6 +910,10 @@ a {
   display: flex;
   gap: .35rem;
   position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .select__select {
   position: relative;
@@ -1550,7 +1558,11 @@ a {
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
-     object-position: center;   
+     object-position: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;   
 }
 .location-page__heading {
   line-height: 1;
@@ -1655,7 +1667,11 @@ a {
       -ms-flex-pack: center;
           justify-content: center;
   margin-top: .75rem; 
-  margin-bottom: 1.25rem;       
+  margin-bottom: 1.25rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;       
 }
 .location-page__add-button-text {
   display: -webkit-box;
@@ -2286,6 +2302,10 @@ a {
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;   
 }
 .request-page__card {
   background-color: var(--secondary-color);
@@ -2482,6 +2502,10 @@ a {
   position: relative;
   font-size: .8rem;
   width: 8.25rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .status-selector__output {
   position: relative;
@@ -2645,6 +2669,10 @@ a {
   text-align: center;
   text-decoration: none;
   outline: 1px solid transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .notification-page__accept-button:hover {
   outline: 1px solid var(--success-color);
@@ -2837,6 +2865,10 @@ a {
   background-color: var(--secondary-color);
   border-radius: .25rem;
   position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .date-picker::after {
   content: '';
