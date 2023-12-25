@@ -101,82 +101,104 @@ class RegistrationForm {
     this._phone = component.querySelector('.js-registration-form__phone');
     this._mail = component.querySelector('.js-registration-form__mail');
     this._agreement = component.querySelector('.js-registration-form__agreement');
+    this._submitButton = component.querySelector('.js-registration-form__submit-button');
     this._successModal = document.querySelector('.js-registration-modal');
   }
 
   _handleSubmit(event) {
-    const formIsValid = this._validate();
-
-    if (!formIsValid) {
-      event.preventDefault();
-    } else {
-      event.preventDefault();
-      this._successModal.classList.add('modal_opened');
-    }
+    event.preventDefault();
+    this._successModal.classList.add('modal_opened');
   }
 
-  _validate() {
-    let formIsValid = true;
-
+  _handleNameChange() {
     const nameValue = this._name.value.trim();
+
     if (nameValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Поле обязательно для заполнения');
     } else if (!this._containsOnlyCyrillic(nameValue)) {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Некорректные символы. Используйте только кириллицу');
     } else if (nameValue.length < 2) {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Слишком мало символов');
     } else {
       this._removeErrorFor(this._name);
     }
 
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleSurnameChange() {
     const surnameValue = this._surname.value.trim();
+
     if (surnameValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._surname, 'Поле обязательно для заполнения');
     } else if (!this._containsOnlyCyrillic(surnameValue)) {
-      formIsValid = false;
       this._setErrorFor(this._surname, 'Некорректные символы. Используйте только кириллицу');
     } else if (surnameValue.length < 2) {
-      formIsValid = false;
       this._setErrorFor(this._surname, 'Слишком мало символов');
     }  else {
       this._removeErrorFor(this._surname);
     }
 
-    const phoneValue = this._phone.value.trim();
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handlePhoneChange() {
+    const phoneValue = this._phone.value.replace(/[^0-9]/g,"");
+
     if (phoneValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._phone, 'Поле обязательно для заполнения');
-    } else if (phoneValue.length !== 16) {
-      formIsValid = false;
+    } else if (phoneValue.length !== 11) {
       this._setErrorFor(this._phone, 'Введите правильный телефон');
     } else {
       this._removeErrorFor(this._phone);
     }
 
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleMailChange() {
     const mailValue = this._mail.value.trim();
+
     if (mailValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._mail, 'Поле обязательно для заполнения');
     } else if (!this._isEmail(mailValue)) {
-      formIsValid = false;
       this._setErrorFor(this._mail, 'Введите правильный email');
     } else {
       this._removeErrorFor(this._mail);
     }
 
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleAgreementChange() {
     const agreementIsAccepted = this._agreement.checked;
+
     if (!agreementIsAccepted) {
-      formIsValid = false;
       this._setErrorFor(this._agreement, 'Нужно принять соглашение');
     } else {
       this._removeErrorFor(this._agreement);
     }
 
-    return formIsValid;
+    this._enableOrDisableSubmitButton();
+  }
+
+  _enableOrDisableSubmitButton() {
+    if (this._allRequiredFieldsFilled() && this._noErrors()) {
+      this._submitButton.disabled = false;
+    } else {
+      this._submitButton.disabled = true;
+    }
+  }
+
+  _allRequiredFieldsFilled() {
+    return this._name.value !== '' 
+        && this._surname.value !== ''
+        && this._phone.value !== ''
+        && this._mail.value !== '';
+  }
+
+  _noErrors() {
+    return !this._component.querySelector('.js-form-control_error');
   }
 
   _containsOnlyCyrillic(string) {
@@ -201,6 +223,7 @@ class RegistrationForm {
     
     formControl.append(errorMessage);
     formControl.classList.add('form-control_error');
+    formControl.classList.add('js-form-control_error');
   }
 
   _removeErrorFor(input) {
@@ -209,11 +232,17 @@ class RegistrationForm {
     if (errorMessage) {
       errorMessage.remove();
       formControl.classList.remove('form-control_error');
+      formControl.classList.remove('js-form-control_error');
     }
   }
 
   _attachEventHandlers() {
     this._component.addEventListener('submit', this._handleSubmit.bind(this));
+    this._name.addEventListener('change', this._handleNameChange.bind(this));
+    this._surname.addEventListener('change', this._handleSurnameChange.bind(this));
+    this._phone.addEventListener('change', this._handlePhoneChange.bind(this));
+    this._mail.addEventListener('change', this._handleMailChange.bind(this));
+    this._agreement.addEventListener('change', this._handleAgreementChange.bind(this));
   }
 }
 
@@ -278,14 +307,7 @@ class CompanyCreationForm {
     this._taxNumber = component.querySelector('.js-company-creation-form__tax-number');
     this._address =component.querySelector('.js-company-creation-form__address');
     this._agreement = component.querySelector('.js-company-creation-form__agreement');
-  }
-
-  _handleSubmit(event) {
-    const formIsValid = this._validate();
-
-    if (!formIsValid) {
-      event.preventDefault();
-    }
+    this._submitButton = component.querySelector('.js-company-creation-form__submit-button')
   }
 
   _handleOrgFormChange() {
@@ -298,62 +320,82 @@ class CompanyCreationForm {
     }
   }
 
-  _validate() {
-    let formIsValid = true;
-
-    const orgFormValue = this._orgForm.value.trim();
-    if (orgFormValue === '') {
-      formIsValid = false;
-      this._setErrorFor(this._orgForm, 'Выберите форму организации');
-    } else {
-      this._removeErrorFor(this._orgForm);
-    }
-
+  _handleNameChange() {
     const nameValue = this._name.value.trim();
+
     if (nameValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Поле обязательно для заполнения');
     } else if (nameValue.length < 2) {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Слишком мало символов');
     }  else {
       this._removeErrorFor(this._name);
     }
 
-    if (orgFormValue === 'Юридическое лицо') {
-      const taxNumberValue = this._taxNumber.value.trim();
-      if (taxNumberValue === '') {
-        formIsValid = false;
-        this._setErrorFor(this._taxNumber, 'Поле обязательно для заполнения');
-      } else if (!this._isTaxNumber(taxNumberValue)) {
-        formIsValid = false;
-        this._setErrorFor(this._taxNumber, 'Введите правильный ИНН');
-      } else {
-        this._removeErrorFor(this._taxNumber);
-      }
+    this._enableOrDisableSubmitButton();
+  }
 
-      const addressValue = this._address.value.trim();
-      if (addressValue === '') {
-        formIsValid = false;
-        this._setErrorFor(this._address, 'Поле обязательно для заполнения');
-      } else {
-        this._removeErrorFor(this._address);
-      }
-    }  
+  _handleTaxNumberChange() {
+    const taxNumberValue = this._taxNumber.value.trim();
 
+    if (taxNumberValue === '') {
+      this._setErrorFor(this._taxNumber, 'Поле обязательно для заполнения');
+    } else if (!this._isTaxNumber(taxNumberValue)) {
+      this._setErrorFor(this._taxNumber, 'Введите правильный ИНН');
+    } else {
+      this._removeErrorFor(this._taxNumber);
+    }
+
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleAddressChange() {
+    const addressValue = this._address.value.trim();
+
+    if (addressValue === '') {
+      this._setErrorFor(this._address, 'Поле обязательно для заполнения');
+    } else {
+      this._removeErrorFor(this._address);
+    }
+
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleAgreementChange() {
     const agreementIsAccepted = this._agreement.checked;
+
     if (!agreementIsAccepted) {
-      formIsValid = false;
       this._setErrorFor(this._agreement, 'Нужно принять соглашение');
     } else {
       this._removeErrorFor(this._agreement);
     }
 
-    return formIsValid;
+    this._enableOrDisableSubmitButton();
   }
 
   _isTaxNumber(value) {
     return /^[0-9]{12}$/.test(value);
+  }
+
+  _enableOrDisableSubmitButton() {
+    if (this._allRequiredFieldsFilled() && this._noErrors()) {
+      this._submitButton.disabled = false;
+    } else {
+      this._submitButton.disabled = true;
+    }
+  }
+
+  _allRequiredFieldsFilled() {
+    if (this._orgForm.value == 'Физическое лицо') {
+      return this._name.value !== '';
+    } else {
+      return this._name.value !== '' 
+        && this._taxNumber.value !== ''
+        && this._address.value !== '';
+    }
+  }
+
+  _noErrors() {
+    return !this._component.querySelector('.js-form-control_error');
   }
 
   _setErrorFor(input, message) {
@@ -369,6 +411,7 @@ class CompanyCreationForm {
     
     formControl.append(errorMessage);
     formControl.classList.add('form-control_error');
+    formControl.classList.add('js-form-control_error');
   }
 
   _removeErrorFor(input) {
@@ -377,12 +420,16 @@ class CompanyCreationForm {
     if (errorMessage) {
       errorMessage.remove();
       formControl.classList.remove('form-control_error');
+      formControl.classList.remove('js-form-control_error');
     }
   }
 
   _attachEventHandlers() {
-    this._component.addEventListener('submit', this._handleSubmit.bind(this));
     this._orgForm.addEventListener('change', this._handleOrgFormChange.bind(this));
+    this._name.addEventListener('change', this._handleNameChange.bind(this));
+    this._taxNumber.addEventListener('change', this._handleTaxNumberChange.bind(this));
+    this._address.addEventListener('change', this._handleAddressChange.bind(this));
+    this._agreement.addEventListener('change', this._handleAgreementChange.bind(this));
   }
 }
 
@@ -618,50 +665,65 @@ class LocationForm {
     this._latitude = component.querySelector('.js-location-page__latitude');
     this._longitude = component.querySelector('.js-location-page__longitude');
     this._phone = component.querySelector('.js-location-form__phone');
+    this._submitButton = component.querySelector('.js-location-page__save-button');
   }
 
-  _handleSubmit(event) {
-    const formIsValid = this._validate();
-
-    if (!formIsValid) {
-      event.preventDefault();
-    }
-  }
-
-  _validate() {
-    let formIsValid = true;
-
+  _handleNameChange() {
     const nameValue = this._name.value.trim();
+
     if (nameValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Поле обязательно для заполнения');
     } else if (nameValue.length < 2) {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Слишком мало символов');
     }  else {
       this._removeErrorFor(this._name);
     }
 
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleAddressChange() {
     const addressValue = this._address.value.trim();
+
     if (addressValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._address, 'Поле обязательно для заполнения');
     } else {
       this._removeErrorFor(this._address);
     }
 
-    const phoneValue = this._phone.value.trim();
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handlePhoneChange() {
+    const phoneValue = this._phone.value.replace(/[^0-9]/g,"");
+
     if (phoneValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._phone, 'Поле обязательно для заполнения');
-    } else if (phoneValue.length !== 16) {
-      formIsValid = false;
+    } else if (phoneValue.length !== 11) {
       this._setErrorFor(this._phone, 'Введите правильный телефон');
     } else {
       this._removeErrorFor(this._phone);
     }
 
-    return formIsValid;
+    this._enableOrDisableSubmitButton();
+  }
+
+  _enableOrDisableSubmitButton() {
+    if (this._allRequiredFieldsFilled() && this._noErrors()) {
+      this._submitButton.disabled = false;
+    } else {
+      this._submitButton.disabled = true;
+    }
+  }
+
+  _allRequiredFieldsFilled() {
+    return this._name.value !== '' 
+        && this._address.value !== ''
+        && this._phone.value !== '';
+  }
+
+  _noErrors() {
+    return !this._component.querySelector('.js-form-control_error');
   }
 
   _setErrorFor(input, message) {
@@ -677,6 +739,7 @@ class LocationForm {
     
     formControl.append(errorMessage);
     formControl.classList.add('form-control_error');
+    formControl.classList.add('js-form-control_error');
   }
 
   _removeErrorFor(input) {
@@ -685,11 +748,14 @@ class LocationForm {
     if (errorMessage) {
       errorMessage.remove();
       formControl.classList.remove('form-control_error');
+      formControl.classList.remove('js-form-control_error');
     }
   }
 
   _attachEventHandlers() {
-    this._component.addEventListener('submit', this._handleSubmit.bind(this));
+    this._name.addEventListener('change', this._handleNameChange.bind(this));
+    this._address.addEventListener('change', this._handleAddressChange.bind(this));
+    this._phone.addEventListener('change', this._handlePhoneChange.bind(this));
   }
 }
 
@@ -756,16 +822,13 @@ class StatusFilter {
   _applyFilter(status) {
     if (status === 'all') {
       [...this._connectedList.children].forEach((item) => {
-        // item.style.display = 'grid';
         item.classList.remove('hidden');
       });
     } else {
       [...this._connectedList.children].forEach((item) => {
         if (item.dataset.status === status) {
-          // item.style.display = 'grid';
           item.classList.remove('hidden');
         } else {
-          // item.style.display = 'none';
           item.classList.add('hidden');
         }
       });
@@ -896,42 +959,52 @@ class RequestCreationForm {
     this._component = component;
     this._name = component.querySelector('.js-request-creation-form__name');
     this._description = component.querySelector('.js-request-creation-form__description');
+    this._submitButton = component.querySelector('.js-request-creation-modal__submit-button');
   }
 
-  _handleSubmit(event) {
-    const formIsValid = this._validate();
-
-    if (!formIsValid) {
-      event.preventDefault();
-    }
-  }
-
-  _validate() {
-    let formIsValid = true;
-
+  _handleNameChange() {
     const nameValue = this._name.value.trim();
+
     if (nameValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Поле обязательно для заполнения');
     } else if (nameValue.length < 3) {
-      formIsValid = false;
       this._setErrorFor(this._name, 'Слишком мало символов');
     } else {
       this._removeErrorFor(this._name);
     }
 
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handleDescriptionChange() {
     const descriptionValue = this._description.value.trim();
+
     if (descriptionValue === '') {
-      formIsValid = false;
       this._setErrorFor(this._description, 'Поле обязательно для заполнения');
     } else if (descriptionValue.length < 3) {
-      formIsValid = false;
       this._setErrorFor(this._description, 'Слишком мало символов');
     }  else {
       this._removeErrorFor(this._description);
     }
 
-    return formIsValid;
+    this._enableOrDisableSubmitButton();
+  }
+
+  _enableOrDisableSubmitButton() {
+    if (this._allRequiredFieldsFilled() && this._noErrors()) {
+      this._submitButton.disabled = false;
+    } else {
+      this._submitButton.disabled = true;
+    }
+  }
+
+  _allRequiredFieldsFilled() {
+    return this._name.value !== '' 
+        && this._description.value !== '';
+  }
+
+  _noErrors() {
+    return !this._component.querySelector('.js-form-control_error');
   }
 
   _setErrorFor(input, message) {
@@ -947,6 +1020,7 @@ class RequestCreationForm {
     
     formControl.append(errorMessage);
     formControl.classList.add('form-control_error');
+    formControl.classList.add('js-form-control_error');
   }
 
   _removeErrorFor(input) {
@@ -955,11 +1029,13 @@ class RequestCreationForm {
     if (errorMessage) {
       errorMessage.remove();
       formControl.classList.remove('form-control_error');
+      formControl.classList.remove('js-form-control_error');
     }
   }
 
   _attachEventHandlers() {
-    this._component.addEventListener('submit', this._handleSubmit.bind(this));
+    this._name.addEventListener('change', this._handleNameChange.bind(this));
+    this._description.addEventListener('change', this._handleDescriptionChange.bind(this));
   }
 }
 
