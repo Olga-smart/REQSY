@@ -264,110 +264,6 @@ if (modals) {
 }
 // #endregion Modal
 
-// #region Select
-class Select {
-  constructor(component) {
-    this._initFields(component);
-    this._handleOutsideClick = this._handleOutsideClick.bind(this);
-    this._attachEventHandlers();
-    this._setSelectedValueIfNecessary();
-  }
-
-  toggle() {
-    this._component.classList.toggle('select_opened');
-
-    if (this._component.classList.contains('select_opened')) {
-      const focusPlaceholder = this._input.dataset.focusPlaceholder;
-      if (focusPlaceholder) {
-        this._input.placeholder = focusPlaceholder;
-      }
-
-      window.addEventListener('click', this._handleOutsideClick);
-    }
-
-    if (!this._component.classList.contains('select_opened')) {
-      if (this._initialPlaceholder) {
-        this._input.placeholder = this._initialPlaceholder;
-      }
-
-      window.removeEventListener('click', this._handleOutsideClick);
-    }
-  } 
-
-  _initFields(component) {
-    this._component = component;
-    this._input = component.querySelector('.js-select__input');
-    this._items = component.querySelectorAll('.js-select__item');
-    this._initialPlaceholder = this._input.placeholder;
-  }
-
-  _setSelectedValueIfNecessary() {
-    this._items.forEach((item) => {
-      if (item.classList.contains('select__item_selected')) {
-        this._input.value = item.textContent;
-
-        if (this._input.classList.contains('js-select__input_width_auto')) {
-          this._adjustInputWidth();
-        }
-      }
-    });
-  }
-
-  _adjustInputWidth() {
-    const style = window.getComputedStyle(this._input);
-    const leftPadding = parseInt(style.paddingLeft);
-    const rightPadding = parseInt(style.paddingRight);
-    const valueWidth = (this._input.value.length) * 8;
-
-    this._input.style.width = '100%';
-    const maxWidth = parseInt(window.getComputedStyle(this._input).width);
-
-    const desiredWidth = leftPadding + valueWidth + rightPadding;
-    
-    this._input.style.width = `${Math.min(maxWidth, desiredWidth)}px`;
-  }
-
-  _handleItemClick(item) {
-    this._items.forEach((item) => {
-      item.classList.remove('select__item_selected');
-    });
-
-    item.classList.add('select__item_selected');
-    this._input.value = item.textContent;
-    this._input.dispatchEvent(new Event('change'));
-    this.toggle();
-
-    if (this._input.classList.contains('js-select__input_width_auto')) {
-      this._adjustInputWidth();
-    }
-  }
-
-  _handleOutsideClick(event) {
-    const { target } = event;
-    const clickOnSelect = this._component.contains(target);
-
-    if (!clickOnSelect) {
-      this.toggle();
-    }
-  }
-
-  _attachEventHandlers() {
-    this._input.addEventListener('click', this.toggle.bind(this));
-
-    this._items.forEach((item) => {
-      item.addEventListener('click', this._handleItemClick.bind(this, item));
-    });
-  }
-}
-
-const selects = document.querySelectorAll('.js-select');
-if (selects) {
-  selects.forEach((select) => {
-    new Select(select);
-  });
-}
-// #endregion Select
-
 // #region Company Creation Form
 class CompanyCreationForm {
   constructor(component) {
@@ -495,6 +391,111 @@ if (companyCreationForm) {
   new CompanyCreationForm(companyCreationForm);
 }
 // #endregion Company Creation Form
+
+// #region Select
+class Select {
+  constructor(component) {
+    this._initFields(component);
+    this._handleOutsideClick = this._handleOutsideClick.bind(this);
+    this._attachEventHandlers();
+    this._setSelectedValueIfNecessary();
+  }
+
+  toggle() {
+    this._component.classList.toggle('select_opened');
+
+    if (this._component.classList.contains('select_opened')) {
+      const focusPlaceholder = this._input.dataset.focusPlaceholder;
+      if (focusPlaceholder) {
+        this._input.placeholder = focusPlaceholder;
+      }
+
+      window.addEventListener('click', this._handleOutsideClick);
+    }
+
+    if (!this._component.classList.contains('select_opened')) {
+      if (this._initialPlaceholder) {
+        this._input.placeholder = this._initialPlaceholder;
+      }
+
+      window.removeEventListener('click', this._handleOutsideClick);
+    }
+  } 
+
+  _initFields(component) {
+    this._component = component;
+    this._input = component.querySelector('.js-select__input');
+    this._items = component.querySelectorAll('.js-select__item');
+    this._initialPlaceholder = this._input.placeholder;
+  }
+
+  _setSelectedValueIfNecessary() {
+    this._items.forEach((item) => {
+      if (item.classList.contains('select__item_selected')) {
+        this._input.value = item.textContent;
+        this._input.dispatchEvent(new Event('change'));
+
+        if (this._input.classList.contains('js-select__input_width_auto')) {
+          this._adjustInputWidth();
+        }
+      }
+    });
+  }
+
+  _adjustInputWidth() {
+    const style = window.getComputedStyle(this._input);
+    const leftPadding = parseInt(style.paddingLeft);
+    const rightPadding = parseInt(style.paddingRight);
+    const valueWidth = (this._input.value.length) * 8;
+
+    this._input.style.width = '100%';
+    const maxWidth = parseInt(window.getComputedStyle(this._input).width);
+
+    const desiredWidth = leftPadding + valueWidth + rightPadding;
+    
+    this._input.style.width = `${Math.min(maxWidth, desiredWidth)}px`;
+  }
+
+  _handleItemClick(item) {
+    this._items.forEach((item) => {
+      item.classList.remove('select__item_selected');
+    });
+
+    item.classList.add('select__item_selected');
+    this._input.value = item.textContent;
+    this._input.dispatchEvent(new Event('change'));
+    this.toggle();
+
+    if (this._input.classList.contains('js-select__input_width_auto')) {
+      this._adjustInputWidth();
+    }
+  }
+
+  _handleOutsideClick(event) {
+    const { target } = event;
+    const clickOnSelect = this._component.contains(target);
+
+    if (!clickOnSelect) {
+      this.toggle();
+    }
+  }
+
+  _attachEventHandlers() {
+    this._input.addEventListener('click', this.toggle.bind(this));
+
+    this._items.forEach((item) => {
+      item.addEventListener('click', this._handleItemClick.bind(this, item));
+    });
+  }
+}
+
+const selects = document.querySelectorAll('.js-select');
+if (selects) {
+  selects.forEach((select) => {
+    new Select(select);
+  });
+}
+// #endregion Select
 
 // #region Scroll Top Button
 class ScrollTopButton {
