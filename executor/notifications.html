@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <link rel="stylesheet" href="../libs/air-datepicker/air-datepicker.css">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Notifications</title>
+</head>
+<body class="page">  
+  <main class="page__content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb__list">
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Главная</a></li>
+          <li class="breadcrumb__item"><a href="#" class="breadcrumb__link">Личный кабинет</a></li>
+          <li class="breadcrumb__item" aria-current="page">Уведомления</li>
+        </ol>
+      </nav>
+      <div class="notifications-page js-notifications-page">
+        <h1 class="page__heading">Уведомления</h1>
+        <div class="notifications-page__body">
+          <ul class="side-menu">
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link side-menu__item_active">Моё</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Локации</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Заявки</a>
+            </li>
+            <li class="side-menu__item">
+              <a href="#" class="side-menu__link">Мои данные</a>
+            </li>
+          </ul>
+          <div class="notifications-page__content">
+            <div class="date-picker js-date-picker notifications-page__date-picker">
+                <input type="text" class="date-picker__input js-date-picker__input" placeholder="Выбрать дату" readonly>
+            </div>
+            <p class="notifications-page__list-date">Сегодня</p>
+            <ul class="notifications-page__list">
+              <li class="notifications-page__item notifications-page__item_fresh">
+                <time class="notifications-page__date" datetime="2023-10-10">10.10.2023</time>
+                <a href="./request.html" class="notifications-page__request-name">Название заявки</a>
+                <div class="notifications-page__comment">У данной задачи изменился статус на «В работе»</div>
+              </li>
+              <li class="notifications-page__item notifications-page__item_fresh">
+                <time class="notifications-page__date" datetime="2023-10-10">10.10.2023</time>
+                <a href="./request.html" class="notifications-page__request-name">Заявка от Иванова</a>
+                <div class="notifications-page__comment">
+                  Была создана новая заявка
+                  <a href="./request.html" class="notification-page__accept-button">Принять</a>
+                </div>
+              </li>
+              <li class="notifications-page__item">
+                <time class="notifications-page__date" datetime="2023-10-10">10.10.2023</time>
+                <a href="./request.html" class="notifications-page__request-name">Название заявки длинное в несколько строк</a>
+                <div class="notifications-page__comment">У данной задачи изменился статус на «Выполнено»</div>
+              </li>
+            </ul>
+            <p class="notifications-page__list-date">Вчера</p>
+            <ul class="notifications-page__list">
+              <li class="notifications-page__item">
+                <time class="notifications-page__date" datetime="2023-10-09">09.10.2023</time>
+                <a href="./request.html" class="notifications-page__request-name">Название заявки</a>
+                <div class="notifications-page__comment">
+                  Была создана новая заявка
+                  <a href="./request.html" class="notification-page__accept-button">Принять</a>
+                </div>
+              </li>
+              <li class="notifications-page__item">
+                <time class="notifications-page__date" datetime="2023-10-09">09.10.2023</time>
+                <a href="./request.html" class="notifications-page__request-name">Заявка от Иванова</a>
+                <div class="notifications-page__comment">
+                  Была создана новая заявка
+                  <a href="./request.html" class="notification-page__accept-button">Принять</a>
+                </div>
+              </li>
+              <li class="notifications-page__item">
+                <time class="notifications-page__date" datetime="2023-10-09">09.10.2023</time>
+                <a href="./request.html" class="notifications-page__request-name">Название заявки длинное в несколько строк</a>
+                <div class="notifications-page__comment">У данной задачи изменился статус на «Выполнено»</div>
+              </li>
+            </ul>
+            <nav class="pagination" aria-label="pagination">
+              <ul class="pagination__list">
+                <li class="pagination__item pagination__item_hidden">
+                  <a class="pagination__link pagination__link_prev" href="#">
+                    <span class="visually-hidden">назад</span>
+                  </a>
+                </li>
+                <li class="pagination__item pagination__item_active">
+                  <a class="pagination__link" href="#" aria-current="page">1</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">2</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link" href="#">3</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link pagination__link_next" href="#">
+                    <span class="visually-hidden">вперед</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>          
+      </div>      
+    </div>
+    <button class="page__scroll-top-button js-page__scroll-top-button"></button>
+  </main>
+
+  <nav class="bottom-menu">
+    <div class="container">
+      <ul class="bottom-menu__list">
+        <li class="bottom-menu__item bottom-menu__item_my bottom-menu__item_active">
+          <a href="#" class="bottom-menu__link">Моё</a>
+          <span class="bottom-menu__badge">1</span>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_locations">
+          <a href="#" class="bottom-menu__link">Локации</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_requests">
+          <a href="#" class="bottom-menu__link">Заявки</a>
+        </li>
+        <li class="bottom-menu__item bottom-menu__item_profile">
+          <a href="#" class="bottom-menu__link">Мои данные</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <script src="../libs/air-datepicker/air-datepicker.js"></script>
+  <script src="../main.js"></script>
+</body>
+</html>
+
