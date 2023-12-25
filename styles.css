@@ -503,6 +503,9 @@ a {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;              
 }
+.img-uploader__img-area:has(img) {
+  background-image: none !important;
+}
 .img-uploader__img-area:hover {
   -webkit-box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.4);
           box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.4);
