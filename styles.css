@@ -2068,6 +2068,9 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-column-gap: .4rem;
+     -moz-column-gap: .4rem;
+          column-gap: .4rem;
   border-bottom: .05rem solid rgba(13, 44, 61, 0.50);
   width: auto;
   position: relative;
@@ -2094,7 +2097,7 @@ a {
   display: inline-block;
   padding-top: .4rem;
   padding-bottom: .4rem;
-  padding-left: 1.8rem;
+  padding-left: 1.4rem;
   padding-right: .75rem;
   position: relative;
   cursor: pointer;
@@ -2113,7 +2116,7 @@ a {
   border: .1rem solid #000;
   border-radius: 50%;
   top: 50%;
-  left: 1.15rem;
+  left: .75rem;
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
