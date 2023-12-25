@@ -1850,7 +1850,7 @@ a {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.requests-page__item:hover .requests-page__request-name::after {
+.requests-page__request-name:hover::after {
   left: 0.5rem;
 }
 .requests-page__accept-button {
