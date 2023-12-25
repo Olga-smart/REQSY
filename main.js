@@ -724,10 +724,14 @@ class StatusFilter {
     this._list = component.querySelector('.js-status-filter__list');
     this._items = component.querySelectorAll('.js-status-filter__item');
     this._output = this._createOutputElement();
+    this._connectedList = document.querySelector('.js-status-filter__connected-list');
 
     this._items.forEach((item) => {
       if (item.classList.contains('status-filter__item_selected')) {
         this._updateOutput(item);
+        if (item.dataset.status !== 'all') {
+          this._applyFilter(item.dataset.status);
+        }
       }
     });
   }
@@ -749,6 +753,25 @@ class StatusFilter {
     this._output.append(clone);
   }
 
+  _applyFilter(status) {
+    if (status === 'all') {
+      [...this._connectedList.children].forEach((item) => {
+        // item.style.display = 'grid';
+        item.classList.remove('hidden');
+      });
+    } else {
+      [...this._connectedList.children].forEach((item) => {
+        if (item.dataset.status === status) {
+          // item.style.display = 'grid';
+          item.classList.remove('hidden');
+        } else {
+          // item.style.display = 'none';
+          item.classList.add('hidden');
+        }
+      });
+    }
+  }
+
   _handleListMouseOver(event) {
     if (event.target.classList.contains('status-filter__item')) {
       this._list.style.setProperty('--underline-width', `${event.target.offsetWidth}px`);
@@ -767,6 +790,7 @@ class StatusFilter {
 
     item.classList.add('status-filter__item_selected');
     this._updateOutput(item);
+    this._applyFilter(item.dataset.status);
     this.toggle();
   }
 
@@ -791,11 +815,9 @@ class StatusFilter {
   }
 }
 
-const statusFilters = document.querySelectorAll('.js-status-filter');
-if (statusFilters) {
-  statusFilters.forEach((filter) => {
-    new StatusFilter(filter);
-  });
+const statusFilter = document.querySelector('.js-status-filter');
+if (statusFilter) {
+  new StatusFilter(statusFilter);
 }
 // #endregion Status Filter
 

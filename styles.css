@@ -1826,6 +1826,9 @@ a {
 .requests-page__item:hover {
   background-color: var(--success-transparent-color);
 }
+.requests-page__item.hidden {
+  display: none;
+}
 .requests-page__company-name {
   white-space: nowrap;
   overflow: hidden;
