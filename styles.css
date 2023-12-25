@@ -1839,6 +1839,9 @@ a {
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
 }
+.requests-page__request-name {
+  text-decoration: none;
+}
 .requests-page__request-name::after {
   content: '';
   display: inline-block;
@@ -2243,6 +2246,7 @@ a {
   margin: 0;
 }
 .request-page__status-group {
+  margin-top: 0;
   margin-bottom: 1.6rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2254,6 +2258,7 @@ a {
   row-gap: 0.2rem;
 }
 .request-page__dates-group {
+  margin-top: 0;
   margin-bottom: .8rem;
   display: grid;
   grid-template-columns: 3.85rem 1fr;
@@ -2263,6 +2268,7 @@ a {
   row-gap: .5rem;
 }
 .request-page__address-group {
+  margin: 0;
   padding-top: 1.25rem;
   padding-bottom: 1.5rem;
   border-top: .05rem solid #EBEFF2;
@@ -2289,6 +2295,7 @@ a {
   right: calc(100% + .2rem);
 }
 .request-page__employees-group {
+  margin: 0;
   padding-top: 1.15rem;
   display: grid;
   grid-template-columns: 6.2rem 1fr;
