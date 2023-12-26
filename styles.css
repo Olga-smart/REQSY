@@ -2371,6 +2371,9 @@ a {
 .request-page__photo-area:nth-child(1) {
   left: 1.7rem;
 }
+.request-page__photo-area:nth-child(3) {
+  cursor: pointer;
+}
 .request-page__photo {
   position: absolute;
   top: 0;

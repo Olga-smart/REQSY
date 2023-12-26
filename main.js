@@ -1131,6 +1131,8 @@ class RequestPagePhotoGroup {
   _initFields(component) {
     this._component = component;
     this._button = component.querySelector('.js-request-page__view-photo-button');
+    this._upperPhotoArea = [...component.querySelectorAll('.js-request-page__photo-area')].pop();
+    this._photosForSmallView = this._getPhotosForSmallView(component);
     this._venobox = new VenoBox({
       numeration: true,
       share: true,
@@ -1138,12 +1140,30 @@ class RequestPagePhotoGroup {
     });
   }
 
+  _getPhotosForSmallView(component) {
+    const container = component.querySelector('.js-request-page__photos-for-small-view');
+
+    const links = [...container.children].map((item) => item.href);
+
+    return links;
+  }
+
   _handleButtonClick() {
     this._component.querySelector('.venobox').dispatchEvent(new Event('click'));
   }
 
+  _handleUpperImageClick() {
+    const img = this._upperPhotoArea.querySelector('.js-request-page__photo');
+    const links = this._photosForSmallView;
+    const maxIndex = links.length - 1;
+    const currentIndex = links.indexOf(img.src);
+    const newIndex = currentIndex === maxIndex ? 0 : (currentIndex + 1);
+    img.src = this._photosForSmallView[newIndex];
+  }
+
   _attachEventHandlers() {
     this._button.addEventListener('click', this._handleButtonClick.bind(this));
+    this._upperPhotoArea.addEventListener('click', this._handleUpperImageClick.bind(this));
   }
 }
 
