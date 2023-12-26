@@ -1155,16 +1155,19 @@ if (requestPagePhotoGroup) {
 }
 // #endregion Request Page Photo Viewer
 
-// #region Date Picker
-class DatePicker {
+// #region Notifications Page
+class NotificationsPage {
   constructor(component) {
     this._initFields(component);
+    this._attachEventHandlers();
+    this._handleListUpdate()
   }
   
   _initFields(component) {
     this._component = component;
-    this._input = component.querySelector('.js-date-picker__input');
-    this._datePicker = this._initDatePicker();
+    this._dateInput = component.querySelector('.js-notifications-page__date-input');
+    this._notificationsList = component.querySelector('.js-notifications-page__list');
+    this._datePicker = this._initDatePicker();    
   }
 
   _initDatePicker() {
@@ -1184,7 +1187,10 @@ class DatePicker {
       },
     }
 
-    return new AirDatepicker(this._input, {
+    const notificationsList = this._notificationsList;
+    const applyFilter = this._applyFilter.bind(this);
+
+    return new AirDatepicker(this._dateInput, {
       navTitles: {
         days: 'MMMM yyyy',
       },
@@ -1192,14 +1198,76 @@ class DatePicker {
       prevHtml: '<svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5.5 9.25L1 5L5.5 0.75" stroke="#131A29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       nextHtml: '<svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9.25L5.5 5L1 0.75" stroke="#131A29" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>',
       maxDate: new Date(),
+      onSelect({formattedDate}) {
+        applyFilter(formattedDate);
+        notificationsList.dispatchEvent(new Event('update'));
+      },
     });
+  }
+
+  _applyFilter(formattedDate) {
+    if (formattedDate === undefined) {
+      [...this._notificationsList.children].forEach((item) => {
+        item.classList.remove('hidden');
+      });
+    } else {
+      [...this._notificationsList.children].forEach((item) => {
+        if (item.dataset.date === formattedDate) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+  }
+
+  _handleListUpdate() {
+    const previousTitles = this._notificationsList.querySelectorAll('.notifications-page__list-date-title');
+    if (previousTitles) {
+      previousTitles.forEach((title) => {
+        title.remove();
+      })
+    }
+
+    const now = new Date();
+    let date;
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+    [...this._notificationsList.children].forEach((item) => {
+      if (item.dataset.date === date) return;
+      if (item.classList.contains('hidden')) return;
+
+      date = item.dataset.date;
+      const title = document.createElement('div');
+      title.className = 'notifications-page__list-date-title';
+
+      const [day, month, year] = date.split('.');
+
+      if ( +year === now.getFullYear() ) {
+        if ( +month === (now.getMonth() + 1) ) {
+          if (+day === now.getDate()) {
+            title.textContent = 'Сегодня';
+          } else if ((+day + 1) === now.getDate()) {
+            title.textContent = 'Вчера';
+          }
+        } else {
+          title.textContent = `${+day} ${months[+month - 1]}`;
+        }        
+      } else {
+        title.textContent = `${+day} ${months[+month - 1]} ${year}`;
+      }
+      
+      item.before(title); 
+    });
+  }
+
+  _attachEventHandlers() {
+    this._notificationsList.addEventListener('update', this._handleListUpdate.bind(this));
   }
 }
 
-const datePickers = document.querySelectorAll('.js-date-picker');
-if (datePickers) {
-  datePickers.forEach((picker) => {
-    new DatePicker(picker);
-  });
+const notificationsPage = document.querySelector('.js-notifications-page');
+if (notificationsPage) {
+  new NotificationsPage(notificationsPage);
 }
-// #endregion Date Picker
+// #endregion Notifications Page

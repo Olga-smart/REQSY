@@ -2597,14 +2597,22 @@ a {
 
 /* #region Notifications Page */
 .notifications-page__date-picker {
-  margin-bottom: .8rem;
+  margin-bottom: .9rem;
 }
-.notifications-page__list-date {
+.notifications-page__list-date-title {
   font-weight: 700;
   letter-spacing: 0.4px;
-  margin-top: 0;
-  margin-bottom: .25rem;
+  line-height: 1.2;
   padding-left: .6rem;
+  padding-right: 0.6rem;
+  padding-top: 2rem;
+  padding-bottom: .25rem;
+}
+.notifications-page__list-date-title:first-child {
+  padding-top: 0;
+}
+.notifications-page__list-date-title + .notifications-page__item:not(.notifications-page__item_fresh) {
+  border-top: 1px solid #EBEFF2;
 }
 .notifications-page__list {
   list-style-type: none;
@@ -2633,8 +2641,8 @@ a {
   border-radius: .75rem;
   margin-bottom: .25rem;
 }
-.notifications-page__item:first-child:not(.notifications-page__item_fresh) {
-  border-top: 1px solid #EBEFF2;
+.notifications-page__item.hidden {
+  display: none;
 }
 .notifications-page__request-name {
   font-weight: 700;
@@ -2715,9 +2723,13 @@ a {
   }
 }
 @media (max-width: 575px) {
-  .notifications-page__list-date {
+  .notifications-page__date-picker {
+    margin-bottom: 1.55rem;
+  }
+  .notifications-page__list-date-title {
     padding-left: 0;
-    margin-bottom: .75rem;
+    padding-bottom: 0;
+    padding-top: .85rem;
   }
   .notifications-page__date,
   .notifications-page__comment {
