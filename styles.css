@@ -1813,6 +1813,7 @@ a {
   margin-bottom: 1.95rem;
 }
 .requests-page__item {
+  position: relative;
   display: grid;
   grid-template-columns: 3fr 2fr 3fr 2fr;
   -webkit-column-gap: 1rem;
@@ -1853,14 +1854,24 @@ a {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.requests-page__request-name:hover::after {
+.requests-page__item:hover .requests-page__request-name::after {
   left: 0.5rem;
+}
+.requests-page__ghost-link {
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 .requests-page__accept-button {
   border-color: var(--success-color);
   padding: .35rem 1.35rem;
   justify-self: start;
   width: auto;
+  z-index: 1;
 }
 .requests-page__accept-button:hover {
   outline-color: var(--success-color);
