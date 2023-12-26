@@ -1343,7 +1343,8 @@ a {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
-          user-select: none;        
+          user-select: none;
+  z-index: 1;               
 }
 .bottom-menu__list {
   list-style-type: none;
@@ -1788,15 +1789,17 @@ a {
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
-  margin-bottom: 2rem;        
+  margin-bottom: 2rem;    
 }
 .requests-page__company-filter {
   width: 100%;
   max-width: 12.5rem;
+  z-index: 2;
 }
 .requests-page__status-filter {
   -ms-flex-negative: 0;
       flex-shrink: 0;
+  z-index: 2;    
 }
 .requests-page__table-header {
   display: grid;
