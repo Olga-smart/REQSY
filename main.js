@@ -97,6 +97,7 @@ class RegistrationForm {
   _initFields(component) {
     this._component = component;
     this._name = component.querySelector('.js-registration-form__name');
+    this._patronymic = component.querySelector('.js-registration-form__patronymic');
     this._surname = component.querySelector('.js-registration-form__surname');
     this._phone = component.querySelector('.js-registration-form__phone');
     this._mail = component.querySelector('.js-registration-form__mail');
@@ -121,6 +122,22 @@ class RegistrationForm {
       this._setErrorFor(this._name, 'Слишком мало символов');
     } else {
       this._removeErrorFor(this._name);
+    }
+
+    this._enableOrDisableSubmitButton();
+  }
+
+  _handlePatronymicChange() {
+    const patronymicValue = this._patronymic.value.trim();
+
+    if (patronymicValue === '') {
+      this._setErrorFor(this._patronymic, 'Поле обязательно для заполнения');
+    } else if (!this._containsOnlyCyrillic(patronymicValue)) {
+      this._setErrorFor(this._patronymic, 'Некорректные символы. Используйте только кириллицу');
+    } else if (patronymicValue.length < 2) {
+      this._setErrorFor(this._patronymic, 'Слишком мало символов');
+    }  else {
+      this._removeErrorFor(this._patronymic);
     }
 
     this._enableOrDisableSubmitButton();
@@ -239,6 +256,7 @@ class RegistrationForm {
   _attachEventHandlers() {
     this._component.addEventListener('submit', this._handleSubmit.bind(this));
     this._name.addEventListener('change', this._handleNameChange.bind(this));
+    this._patronymic.addEventListener('change', this._handlePatronymicChange.bind(this));
     this._surname.addEventListener('change', this._handleSurnameChange.bind(this));
     this._phone.addEventListener('change', this._handlePhoneChange.bind(this));
     this._mail.addEventListener('change', this._handleMailChange.bind(this));
