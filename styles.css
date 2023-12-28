@@ -212,7 +212,7 @@ a {
 /* #region Form Elements */
 .input {
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border-bottom: .05rem solid rgba(0, 0, 0, 0.15);
   padding-top: .85rem;
   padding-left: .5rem;
   padding-right: .5rem;
@@ -670,6 +670,20 @@ a {
       -ms-flex-align: start;
           align-items: flex-start;  
 }
+.registration-form__sms-input-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin-top: .5rem;
+}
+.registration-form__sms {
+  border: .05rem solid rgba(0, 0, 0, 0.15);
+  border-right: none;
+  padding: .25rem .5rem;
+}
+.registration-form__sms-submit-button {
+  border-radius: 0;
+  padding: 0 1rem;
+}
 
 /* #region Media Registration Form */
 @media (max-width: 991px) {
@@ -766,12 +780,13 @@ a {
   background-repeat: no-repeat;
   background-position: top center;
 }
-.registration-modal__message {
+.registration-modal__success-message {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
   line-height: normal;
   letter-spacing: .04rem;
+  display: none;
 }
 
 /* #region Media Registration Modal */

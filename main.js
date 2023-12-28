@@ -103,12 +103,20 @@ class RegistrationForm {
     this._mail = component.querySelector('.js-registration-form__mail');
     this._agreement = component.querySelector('.js-registration-form__agreement');
     this._submitButton = component.querySelector('.js-registration-form__submit-button');
-    this._successModal = document.querySelector('.js-registration-modal');
+    this._modal = document.querySelector('.js-registration-modal');
+    this._smsForm = this._modal.querySelector('.js-registration-modal__sms-form');
+    this._successMessage = this._modal.querySelector('.js-registration-modal__success-message');
   }
 
   _handleSubmit(event) {
     event.preventDefault();
-    this._successModal.classList.add('modal_opened');
+    this._modal.classList.add('modal_opened');
+  }
+
+  _handleSmsSubmit() {
+    event.preventDefault();
+    this._smsForm.style.display = 'none';
+    this._successMessage.style.display = 'block';
   }
 
   _handleNameChange() {
@@ -254,13 +262,14 @@ class RegistrationForm {
   }
 
   _attachEventHandlers() {
-    this._component.addEventListener('submit', this._handleSubmit.bind(this));
     this._name.addEventListener('change', this._handleNameChange.bind(this));
     this._patronymic.addEventListener('change', this._handlePatronymicChange.bind(this));
     this._surname.addEventListener('change', this._handleSurnameChange.bind(this));
     this._phone.addEventListener('change', this._handlePhoneChange.bind(this));
     this._mail.addEventListener('change', this._handleMailChange.bind(this));
     this._agreement.addEventListener('change', this._handleAgreementChange.bind(this));
+    this._component.addEventListener('submit', this._handleSubmit.bind(this));
+    this._smsForm.addEventListener('submit', this._handleSmsSubmit.bind(this));
   }
 }
 

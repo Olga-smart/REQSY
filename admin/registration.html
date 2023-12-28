@@ -74,7 +74,16 @@
     <div class="modal__window js-modal__window registration-modal__window">
       <div class="modal__body registration-modal__body" style="background-image: url(../img/registration-modal.svg)">
         <button class="modal__close-button js-modal__close-button">✕<span class="visually-hidden">Закрыть</span></button>
-        <div class="registration-modal__message">Регистрация прошла успешно!</div>
+        <form class="registration-modal__sms-form js-registration-modal__sms-form">
+          <div class="form-control js-form-control">
+            <label for="registrationSms">Введите код из смс</label>
+            <div class="registration-form__sms-input-group">
+              <input type="text" class="input registration-form__sms js-registration-form__sms" id="registrationSms" name="sms">
+              <button type="submit" class="button registration-form__sms-submit-button">Отправить</button>
+            </div>
+          </div>
+        </form>
+        <div class="registration-modal__success-message js-registration-modal__success-message">Регистрация прошла успешно!</div>
       </div>    
     </div>
   </div>
