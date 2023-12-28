@@ -11,6 +11,7 @@ class ImageUploader {
     this._component = component;
     this._input = component.querySelector('.js-img-uploader__input');
     this._imageAreas = Array.from(component.querySelectorAll('.js-img-uploader__img-area'));
+    this._upperImageArea = [...component.querySelectorAll('.js-img-uploader__img-area')].pop();
     this._button = component.querySelector('.js-img-uploader__button');
   }
 
@@ -41,6 +42,10 @@ class ImageUploader {
     }
   }
 
+  _handleUpperImageAreaClick() {
+    this._input.click();
+  }
+
   _removePreviousImages() {
     this._imageAreas.forEach((area) => {
       const image = area.querySelector('.js-img-uploader__img');
@@ -51,8 +56,9 @@ class ImageUploader {
   }
 
   _attachEventHandlers() {
-    this._button.addEventListener('click', this._handleButtonClick.bind(this));
+    this._button?.addEventListener('click', this._handleButtonClick.bind(this));
     this._input.addEventListener('change', this._handleInputChange.bind(this));
+    this._upperImageArea.addEventListener('click', this._handleUpperImageAreaClick.bind(this));
   }
 }
 
