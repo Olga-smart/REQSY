@@ -67,7 +67,7 @@
     <button class="page__scroll-top-button js-page__scroll-top-button"></button>
   </main>
 
-  <div class="modal js-modal registration-modal js-registration-modal">
+  <div class="modal js-modal registration-modal js-registration-modal modal_opened">
     <div class="modal__window js-modal__window registration-modal__window">
       <div class="modal__body registration-modal__body" style="background-image: url(../img/registration-modal.svg)">
         <button class="modal__close-button js-modal__close-button">✕<span class="visually-hidden">Закрыть</span></button>
@@ -80,7 +80,12 @@
             </div>
           </div>
         </form>
-        <div class="registration-modal__success-message js-registration-modal__success-message">Регистрация прошла успешно!</div>
+        <div class="registration-modal__success-message js-registration-modal__success-message">
+          Регистрация прошла успешно!
+          <a href="./company-creation.html" class="button button_secondary button_icon_plus registration-modal__company-creation-link">
+            <span class="button__text">Создайте компанию</span>
+          </a>
+        </div>
       </div>    
     </div>
   </div>

@@ -776,7 +776,8 @@ a {
 }
 .registration-modal__body {
   background-color: var(--secondary-color);
-  padding: 25.85rem 4.75rem 3.2rem;
+  /* padding: 25.85rem 4.75rem 3.2rem; */
+  padding: 23rem 4.75rem 3.2rem;
   background-size: 92%;
   background-repeat: no-repeat;
   background-position: top center;
@@ -788,6 +789,10 @@ a {
   line-height: normal;
   letter-spacing: .04rem;
   display: none;
+}
+.registration-modal__company-creation-link {
+  display: block;
+  margin-top: 1rem;
 }
 
 /* #region Media Registration Modal */
