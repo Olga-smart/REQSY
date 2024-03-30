@@ -406,7 +406,7 @@ class CompanyCreationForm {
   }
 
   _isTaxNumber(value) {
-    return /^[0-9]{12}$/.test(value);
+    return (/[0-9]/.test(value) && value.length < 13);
   }
 
   _enableOrDisableSubmitButton() {
@@ -933,6 +933,9 @@ class RequestsPage {
     this._names = component.querySelectorAll('.js-requests-page__request-name');
     this._createRequestButton = component.querySelector('.js-requests-page__create-button');
     this._requestCreationModal = document.querySelector('.js-request-creation-modal');
+    this._orgInput = component.querySelector('.js-requests-page__org-input');
+    this._orgSelectItems = component.querySelectorAll('.js-select__item');
+    this._requestsList = component.querySelector('.js-requests-page__list');
   }
 
   _cropNames() {
@@ -969,9 +972,35 @@ class RequestsPage {
     this._requestCreationModal.classList.add('modal_opened');
   }
 
+  _handleOrgSelectItemClick(item) {
+    this._orgInput.dataset.locationId = item.dataset.locationId;
+    this._applyOrgFilter();
+  }
+
+  _applyOrgFilter() {
+    const locationId = this._orgInput.dataset.locationId;
+    if (!locationId) return;
+    if (locationId === 'all') {
+      [...this._requestsList.children].forEach((item) => {
+        item.classList.remove('hidden');
+      });
+    } else {
+      [...this._requestsList.children].forEach((item) => {
+        if (item.dataset.locationId === locationId) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+  }
+
   _attachEventHandlers() {
     window.addEventListener('resize', this._handleWindowResize.bind(this));
     this._createRequestButton?.addEventListener('click', this._handleCreateRequestButtonClick.bind(this));
+    this._orgSelectItems.forEach((item) => {
+      item.addEventListener('click', this._handleOrgSelectItemClick.bind(this, item));
+    });
   }
 }
 
@@ -1302,6 +1331,8 @@ class NotificationsPage {
             title.textContent = 'Сегодня';
           } else if ((+day + 1) === now.getDate()) {
             title.textContent = 'Вчера';
+          } else {
+            title.textContent = `${+day} ${months[+month - 1]}`;
           }
         } else {
           title.textContent = `${+day} ${months[+month - 1]}`;

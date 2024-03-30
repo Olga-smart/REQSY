@@ -48,19 +48,19 @@
                 <div class="select js-select select_theme_compact">
                   <label for="companySelect" class="select__label">Организация:</label>
                   <div class="select__select">
-                    <div class="select__input-wrapper ">
-                      <input type="text" class="select__input js-select__input js-select__input_width_auto" id="companySelect" name="form" readonly>
+                    <div class="select__input-wrapper">
+                      <input type="text" class="select__input js-select__input js-select__input_width_auto js-requests-page__org-input" id="companySelect" name="form" readonly>
                     </div>              
                     <ul class="select__options">
-                      <li class="select__item js-select__item select__item_selected">Все</li>
-                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
-                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
-                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
-                      <li class="select__item js-select__item">Имя компании</li>
-                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
-                      <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
-                      <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
-                      <li class="select__item js-select__item">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item select__item_selected" data-location-id="all">Все</li>
+                      <li class="select__item js-select__item" data-location-id="1">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item" data-location-id="2">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item" data-location-id="3">ИП Андреев Пётр Григорьевич</li>
+                      <li class="select__item js-select__item" data-location-id="4">Имя компании</li>
+                      <li class="select__item js-select__item" data-location-id="2">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item" data-location-id="1">Имя компании И.И. Иванова</li>
+                      <li class="select__item js-select__item" data-location-id="2">ООО «Холдинг Групп»</li>
+                      <li class="select__item js-select__item" data-location-id="3">ИП Андреев Пётр Григорьевич</li>
                       <li class="select__item js-select__item">Все</li>
                       <li class="select__item js-select__item">Имя компании И.И. Иванова</li>
                       <li class="select__item js-select__item">ООО «Холдинг Групп»</li>
@@ -111,70 +111,70 @@
               <div>Статус заявки</div>
             </div>
             <div class="requests-page__list js-requests-page__list js-status-filter__connected-list">
-              <div class="requests-page__item js-requests-page__item" data-status="work">
-                <span class="requests-page__company-name" title="Имя компании И.И. Иванова много много слов очень длинное название компании">Имя компании И.И. Иванова много много слов очень длинное название компании</span>
+              <div class="requests-page__item js-requests-page__item" data-location-id="1" data-status="work">
+                <span class="requests-page__company-name" title="Имя компании И.И. Иванова">Имя компании И.И. Иванова</span>
                 <time class="requests-page__date" datetime="2023-10-10">10.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Заявка от Иванова много много слов очень длинное название заявки">Заявка от Иванова много много слов очень длинное название заявки</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_work">В работе</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="new">
+              <div class="requests-page__item js-requests-page__item" data-location-id="2" data-status="new">
                 <span class="requests-page__company-name" title="ООО «Холдинг Групп»">ООО «Холдинг Групп»</span>
                 <time class="requests-page__date" datetime="2023-10-08">08.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки несколько слов">Название заявки несколько слов</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_new">Новая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="new">
+              <div class="requests-page__item js-requests-page__item" data-location-id="3" data-status="new">
                 <span class="requests-page__company-name" title="ИП Андреев Пётр Григорьевич">ИП Андреев Пётр Григорьевич</span>
                 <time class="requests-page__date" datetime="2023-10-07">07.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_new">Новая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="completed">
+              <div class="requests-page__item js-requests-page__item" data-location-id="4" data-status="completed">
                 <span class="requests-page__company-name" title="Имя компании">Имя компании</span>
                 <time class="requests-page__date" datetime="2023-09-01">01.09.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_completed">Завершённая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="work">
+              <div class="requests-page__item js-requests-page__item" data-location-id="1" data-status="work">
                 <span class="requests-page__company-name" title="Имя компании И.И. Иванова">Имя компании И.И. Иванова</span>
                 <time class="requests-page__date" datetime="2023-10-10">10.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Заявка от Иванова">Заявка от Иванова</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_work">В работе</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="new">
+              <div class="requests-page__item js-requests-page__item" data-location-id="2" data-status="new">
                 <span class="requests-page__company-name" title="ООО «Холдинг Групп»">ООО «Холдинг Групп»</span>
                 <time class="requests-page__date" datetime="2023-10-08">08.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки несколько слов">Название заявки несколько слов</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_new">Новая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="new">
+              <div class="requests-page__item js-requests-page__item" data-location-id="3" data-status="new">
                 <span class="requests-page__company-name" title="ИП Андреев Пётр Григорьевич">ИП Андреев Пётр Григорьевич</span>
                 <time class="requests-page__date" datetime="2023-10-07">07.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_new">Новая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="completed">
+              <div class="requests-page__item js-requests-page__item" data-location-id="4" data-status="completed">
                 <span class="requests-page__company-name" title="Имя компании">Имя компании</span>
                 <time class="requests-page__date" datetime="2023-09-01">01.09.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_completed">Завершённая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="completed">
+              <div class="requests-page__item js-requests-page__item" data-location-id="4" data-status="completed">
                 <span class="requests-page__company-name" title="Имя компании">Имя компании</span>
                 <time class="requests-page__date" datetime="2023-09-01">01.09.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Название заявки">Название заявки</span>
                 <a class="requests-page__ghost-link" href="./request.html"></a>
                 <span class="request-status request-status_completed">Завершённая</span>
               </div>
-              <div class="requests-page__item js-requests-page__item" data-status="work">
+              <div class="requests-page__item js-requests-page__item" data-location-id="1" data-status="work">
                 <span class="requests-page__company-name" title="Имя компании И.И. Иванова">Имя компании И.И. Иванова</span>
                 <time class="requests-page__date" datetime="2023-10-10">10.10.2023</time>
                 <span class="requests-page__request-name js-requests-page__request-name" title="Заявка от Иванова">Заявка от Иванова</span>
